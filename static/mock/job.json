@@ -1,0 +1,17 @@
+[{
+    "id": 1,
+    "name": "前端开发",
+    "position": "上海",
+    "year": "1~3年",
+    "education": "本科",
+    "money": "10~20K",
+    "status": "1"
+}, {
+    "id": 2,
+    "name": "PHP开发",
+    "position": "北京",
+    "year": "1~3年",
+    "education": "硕士",
+    "money": "10~20K",
+    "status": "2"
+}]
