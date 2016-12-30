@@ -1,8 +1,8 @@
-// The Vue build version to load with the `import` command
-// (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 import Vue from 'vue';
 import router from './router.config';
 import store from './store';
+
+import App from './App';
 
 // 导入Config
 if (process.env.NODE_ENV !== 'production') {
@@ -13,6 +13,8 @@ if (process.env.NODE_ENV !== 'production') {
 
 /* eslint-disable no-unused-vars */
 const app = new Vue({
+  el: '#app',
   router,
-  store
-}).$mount('#app');
+  store,
+  ...App
+});

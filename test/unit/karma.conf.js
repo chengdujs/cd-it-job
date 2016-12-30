@@ -56,10 +56,7 @@ module.exports = function (config) {
     browsers: ['PhantomJS'],
     frameworks: ['mocha', 'sinon-chai'],
     reporters: ['spec', 'coverage'],
-    files: [
-      './libs/es6-promise.auto.min.js',
-      './index.js'
-    ],
+    files: ['./index.js'],
     preprocessors: {
       './index.js': ['webpack', 'sourcemap']
     },
