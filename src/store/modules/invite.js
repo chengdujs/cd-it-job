@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { INVITE } from '../constants'
 
 /**
@@ -30,11 +29,11 @@ const mutations = {
 */
 const actions = {
   [INVITE.GET_LIST](store) {
-    axios('/static/mock/job.json').then(res => {
-      if (res.status === 200) {
-        store.commit(INVITE.GET_LIST, res.data);
-      }
-    });
+    // axios('/static/mock/job.json').then(res => {
+    //   if (res.status === 200) {
+    //     store.commit(INVITE.GET_LIST, res.data);
+    //   }
+    // });
   }
 }
 

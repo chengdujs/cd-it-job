@@ -1,9 +1,14 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
+import Layout from './pages/Layout';
+import Test from './pages/Test';
 import NotFound from './pages/NotFound';
 
-import { InviteApp, InviteHotList, InviteStaleList } from './pages/invite';
+import Home from './pages/Home';
+import Search from './pages/Search';
+import Message from './pages/Message';
+import My from './pages/My';
 
 // 注册路由
 Vue.use(VueRouter);
@@ -12,13 +17,15 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '',
-    component: InviteApp,
-    redirect: '/hot',
+    component: Layout,
     children: [
-      { path: 'hot', component: InviteHotList },
-      { path: 'stale', component: InviteStaleList }
+      { path: '', component: Home },
+      { path: 'search', component: Search },
+      { path: 'message', component: Message },
+      { path: 'my', component: My }
     ]
   },
+  { path: '/test', component: Test },
   { path: '*', component: NotFound }
 ];
 
