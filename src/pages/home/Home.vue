@@ -6,8 +6,8 @@
   </div>
 </template>
 <script>
-  import { jobItem } from './../components';
-  import { ajax } from './../common';
+  import { jobItem } from './../../components';
+  import { ajax } from './../../common';
   export default {
     components: {
       jobItem

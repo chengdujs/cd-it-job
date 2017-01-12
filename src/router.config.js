@@ -2,13 +2,24 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import Layout from './pages/Layout';
-import Test from './pages/Test';
-import NotFound from './pages/NotFound';
 
-import Home from './pages/Home';
-import Search from './pages/Search';
-import Message from './pages/Message';
-import My from './pages/My';
+// System
+import { NotFound } from './pages/system';
+
+// Home
+import { Home } from './pages/home';
+
+// Search
+import { Search } from './pages/search';
+
+// Message
+import { Message } from './pages/message';
+
+// My
+import { My } from './pages/my';
+
+// Test Page
+import Test from './pages/Test';
 
 // 注册路由
 Vue.use(VueRouter);
