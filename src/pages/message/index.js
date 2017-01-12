@@ -1,5 +1,5 @@
-import Message from './Message';
+import MessagePage from './MessagePage';
 
 export {
-  Message
+  MessagePage
 };

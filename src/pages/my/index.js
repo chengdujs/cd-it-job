@@ -1,5 +1,5 @@
-import My from './My';
+import MyPage from './MyPage';
 
 export {
-  My
+  MyPage
 };

@@ -1,5 +1,5 @@
-import NotFound from './NotFound';
+import NotFoundPage from './NotFoundPage';
 
 export {
-  NotFound
+  NotFoundPage
 };
