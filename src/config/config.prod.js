@@ -1,5 +1,6 @@
 const conf = {
-  isDebug: false
+  isDebug: false,
+  apiHost: ''
 };
 
 window.AppConf = conf;
