@@ -54,7 +54,9 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel',
-        include: projectRoot,
+        include: [
+          path.join(projectRoot, 'src')
+        ],
         exclude: /node_modules/
       },
       {
