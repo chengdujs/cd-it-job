@@ -1,4 +1,4 @@
-<style>
+<style scoped>
   .vw-toast{
     opacity: 0;
     transition: opacity .3s linear;
