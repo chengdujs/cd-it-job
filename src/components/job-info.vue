@@ -47,6 +47,8 @@
             return '热';
           case 2:
             return '急';
+          default:
+            return '';
         }
       }
     },
