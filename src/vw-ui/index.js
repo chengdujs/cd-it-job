@@ -1,6 +1,8 @@
-import Button from './button/Button';
-import Tabbar from './tabbar/Tabbar';
-import TabItem from './tabbar/TabItem';
+import Button from './components/button/Button';
+import Tabbar from './components/tabbar/Tabbar';
+import TabItem from './components/tabbar/TabItem';
+
+import Toast from './components/toast/toast.js';
 
 // All components.
 const COMPONENTS = [
@@ -9,8 +11,15 @@ const COMPONENTS = [
   TabItem
 ];
 
-const install = function (Vue) {
+const SERVICES = [
+  Toast
+];
+
+const install = Vue => {
   if (install.installed) return;
+  SERVICES.forEach(service => {
+    Vue[service.name] = Vue.prototype[service.name] = service;
+  });
   COMPONENTS.forEach(comp => {
     Vue.component(comp.name, comp);
   });

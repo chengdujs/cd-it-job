@@ -2,7 +2,7 @@
   <div class="page-layout">
     <router-view></router-view>
     <vw-tabbar v-model="pageName">
-      <vw-tab-item label="首页" value="">
+      <vw-tab-item label="首页" value="home">
         <i slot="icon" class="ion-home">
       </vw-tab-item>
       <vw-tab-item label="搜索" value="search">
@@ -26,6 +26,9 @@
     },
     watch: {
       pageName(newVal) {
+        if (newVal === 'home') {
+          newVal = '';
+        }
         this.$router.push(`/${newVal}`);
       }
     }

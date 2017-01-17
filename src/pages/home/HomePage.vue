@@ -7,7 +7,7 @@
       </div>
     </div>
     <div class="job-content">
-      <div class="job-banner"><img src="../assets/banner.png"></div>
+      <div class="job-banner"><img src="../../assets/banner.png"></div>
       <div class="job-list">
         <div class="job-list-item" v-for="job in jobs">
           <job-split></job-split>
@@ -18,8 +18,8 @@
   </div>
 </template>
 <script>
-  import { jobInfo, jobSplit } from './../components';
-  import { ajax } from './../common';
+  import { jobInfo, jobSplit } from 'components';
+  import { ajax } from 'common';
   export default {
     components: {
       jobInfo,
@@ -42,10 +42,6 @@
 </script>
 <style lang="scss" type="text/scss">
 
-  .invite-hot, .invite-hot:before, .invite-hot:after {
-    box-sizing: border-box;
-  }
-
   .invite-hot img {
     max-width: 100%;
     vertical-align: top;
@@ -62,6 +58,7 @@
     display: flex;
     align-items: center;
     color: #FFF;
+    box-sizing: border-box;
 
     &.primary {
       background-color: #1ac788;

@@ -1,14 +1,25 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
-import Layout from './pages/Layout';
-import Test from './pages/Test';
-import NotFound from './pages/NotFound';
+import LayoutPage from './pages/LayoutPage';
 
-import Home from './pages/Home';
-import Search from './pages/Search';
-import Message from './pages/Message';
-import My from './pages/My';
+// System
+import { NotFound } from './pages/system';
+
+// Home
+import { HomePage } from './pages/home';
+
+// Search
+import { SearchPage } from './pages/search';
+
+// Message
+import { MessagePage } from './pages/message';
+
+// My
+import { MyPage } from './pages/my';
+
+// Test Page
+import TestPage from './pages/TestPage';
 
 // 注册路由
 Vue.use(VueRouter);
@@ -17,15 +28,15 @@ Vue.use(VueRouter);
 const routes = [
   {
     path: '',
-    component: Layout,
+    component: LayoutPage,
     children: [
-      { path: '', component: Home },
-      { path: 'search', component: Search },
-      { path: 'message', component: Message },
-      { path: 'my', component: My }
+      { path: '', component: HomePage },
+      { path: 'search', component: SearchPage },
+      { path: 'message', component: MessagePage },
+      { path: 'my', component: MyPage }
     ]
   },
-  { path: '/test', component: Test },
+  { path: '/test', component: TestPage },
   { path: '*', component: NotFound }
 ];
 
