@@ -5,7 +5,11 @@
       <div class="job-info-text">
         <div class="job-info__name">
           <span class="job">{{ job.jobName }}</span>
-          <span class="type" v-if="job.jobInfo.type !== 0" :class="classMap[job.jobInfo.type - 1]">{{ infoType }}</span>
+          <span class="type"
+                v-if="job.jobInfo.type && (job.jobInfo.type !== 0)"
+                :class="classMap[job.jobInfo.type - 1]">
+            {{ infoType }}
+          </span>
         </div>
         <div class="job-info__date">{{ job.jobInfo.date | format }}</div>
       </div>
@@ -37,7 +41,7 @@
     },
     computed: {
       infoType() {
-        let type = this.job.jobInfo.type || null;
+        let type = this.job.jobInfo.type;
         switch (type) {
           case 1:
             return '热';

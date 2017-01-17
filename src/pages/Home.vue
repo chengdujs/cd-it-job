@@ -42,11 +42,11 @@
 </script>
 <style lang="scss" type="text/scss">
 
-  *, *:before, *:after {
+  .invite-hot, .invite-hot:before, .invite-hot:after {
     box-sizing: border-box;
   }
 
-  img {
+  .invite-hot img {
     max-width: 100%;
     vertical-align: top;
   }
