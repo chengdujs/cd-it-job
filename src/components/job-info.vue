@@ -11,7 +11,7 @@
       </div>
       <div class="job-info-text">
         <div class="job-info__addr"><i class="icon ion-ios-location-outline"></i>{{ job.jobAddress }}</div>
-        <div class="job-info__salary">{{ job.jobCompensation }}K</div>
+        <div class="job-info__salary">{{ job.jobCompensation }}</div>
       </div>
     </div>
     <div class="job-info-sub">
