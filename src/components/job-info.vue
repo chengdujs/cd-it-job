@@ -7,7 +7,7 @@
           <span class="job">{{ job.jobName }}</span>
           <span class="type" v-if="job.jobInfo.type !== 0" :class="classMap[job.jobInfo.type - 1]">{{ infoType }}</span>
         </div>
-        <div class="job-info__date">{{ job.jobInfo.date }}</div>
+        <div class="job-info__date">{{ job.jobInfo.date | format }}</div>
       </div>
       <div class="job-info-text">
         <div class="job-info__addr"><i class="icon ion-ios-location-outline"></i>{{ job.jobAddress }}</div>
@@ -22,6 +22,8 @@
 </template>
 
 <script type="text/ecmascript-6">
+  import { formatDate } from './../common'
+
   export default {
     props: {
       job: {
@@ -42,6 +44,12 @@
           case 2:
             return '急';
         }
+      }
+    },
+    filters: {
+      format (time) {
+        let date = new Date(time)
+        return formatDate(date, 'M月dd日');
       }
     }
   }
@@ -124,6 +132,7 @@
 
     &__date {
       width: 65px;
+      text-align: right;
       color: #999;
       font-size: 12px;
     }

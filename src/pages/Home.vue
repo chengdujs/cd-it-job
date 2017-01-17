@@ -93,6 +93,10 @@
     }
   }
 
+  .job-banner {
+    text-align: center;
+  }
+
   .job-content {
     width: 100%;
     position: absolute;
