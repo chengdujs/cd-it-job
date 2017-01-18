@@ -1,3 +1,5 @@
+require('./css/all.scss');
+
 import Vue from 'vue';
 import router from './router.config';
 import store from './store';
