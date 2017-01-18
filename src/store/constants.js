@@ -12,9 +12,10 @@ export const INVITE = {
 }
 
 /**
- * Example
+ * job模块
+ * 包含首页、搜索页的招聘信息
 */
 
-export const EXAMPLE = {
-  GET_SOMEONE: 'GET_SOMEONE'
+export const JOB = {
+  GET_JOBS: 'GET_JOBS'
 }

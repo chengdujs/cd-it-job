@@ -18,25 +18,21 @@
   </div>
 </template>
 <script>
+  import { mapState } from 'vuex';
   import { jobInfo, jobSplit } from 'components';
-  import { ajax } from 'common';
+
   export default {
     components: {
       jobInfo,
       jobSplit
     },
-    data() {
-      return {
-        jobs: []
-      };
-    },
     created() {
-      ajax.get('http://chat.hstar.org:8601/e2607fcaf7fe/employmentList')
-        .then(data => {
-          if (data.state === 1) {
-            this.jobs = data.data;
-          }
-        });
+      this.$store.dispatch('GET_JOBS')
+    },
+    computed: {
+      ...mapState({
+        jobs: state => state.job.jobs
+      })
     }
   };
 </script>
