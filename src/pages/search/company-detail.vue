@@ -2,9 +2,9 @@
   <div class="company-name">
     <div class="title">
       <i class="ion-podium"></i>
-      <span> {{arg[0]}}</span>
+      <span> {{companyModel[0]}}</span>
     </div>
-    <div class="text"> {{arg[1]}}</div>
+    <div class="text"> {{companyModel[1]}}</div>
   </div>
 </template>
 
@@ -12,7 +12,7 @@
 export default {
   name: 'company-name',
   props: {
-    arg: {
+    companyModel: {
       type: Array,
       default() {
         return [];

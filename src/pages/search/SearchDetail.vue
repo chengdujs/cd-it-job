@@ -47,11 +47,11 @@
     </div>
     <job-split></job-split>
     <div class="company-detail-wrapper">
-        <companyDetail :arg="comDetail.companyName"></companyDetail>
+        <company-detail :companyModel="comDetail.companyName"></company-detail>
     </div>
     <job-split></job-split>
     <div class="company-detail-wrapper">
-      <companyDetail :arg="comDetail.companyDetail"></companyDetail>
+      <company-detail :companyModel="comDetail.companyDetail"></company-detail>
     </div>
     <job-split></job-split>
     <div class="push-wrapper">
@@ -78,16 +78,9 @@
         tag: {}
       }
     },
-    props() {
-
-    },
     computed: {
       mark() {
-        if (!this.markflag) {
-          return '收藏职位';
-        } else {
-          return '点击收藏';
-        }
+        return this.markflag ? '点击收藏' : '收藏职位';
       }
     },
     components: {
@@ -104,12 +97,20 @@
         .then(data => {
           if (data.status === 1) {
             return data.body;
+          } else {
+            throw new Error();
           }
         })
         .then(data => {
           this.comDetail = data;
           this.money = data.money;
           this.tag = data.tag;
+        })
+        .catch(() => {
+          this.$toast.msg('请求的数据未得到', {duration: 3000},
+          () => {
+            window.history.go(-1);
+          });
         });
       },
       addMark() {
