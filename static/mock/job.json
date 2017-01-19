@@ -4,14 +4,24 @@
     "position": "上海",
     "year": "1~3年",
     "education": "本科",
-    "money": "10~20K",
-    "status": "1"
+    "money": "10-20K",
+    "status": "1",
+    "company": {
+      "name": "哔哩哔哩",
+      "lastUpdateDate": 1484555342388,
+      "logoUrl": "https://www.lgstatic.com/thumbnail_120x120/i/image/M00/37/52/CgqKkVdf7WuAfS4yAABKqTIhsAA794.jpg"
+    }
 }, {
     "id": 2,
     "name": "PHP开发",
     "position": "北京",
     "year": "1~3年",
     "education": "硕士",
-    "money": "10~20K",
-    "status": "2"
+    "money": "10-20K",
+    "status": "2",
+    "company": {
+      "name": "哔哩哔哩",
+      "lastUpdateDate": 1484555342388,
+      "logoUrl": "https://www.lgstatic.com/thumbnail_120x120/i/image/M00/37/52/CgqKkVdf7WuAfS4yAABKqTIhsAA794.jpg"
+    }
 }]
