@@ -1,48 +1,134 @@
 <template>
   <div class="page-search">
     <div class="job-search">
-      <div class="job-search__label"><i class="icon ion-ios-location"></i><span class="city">成都</span></div>
+      <div class="job-search__label" @click="selectCity">
+        <i class="icon ion-ios-location"></i>
+        <span class="city">成都</span>
+      </div>
       <div class="job-search__form">
-        <input class="input" type="search" placeholder="请输入职位/地址/关键字">
-        <span class="icon ion-ios-search-strong"></span>
+        <input class="input" type="search" placeholder="请输入职位/地址/关键字"
+               @click="onFocus" ref="inputEl" v-model="inputJob">
+        <span class="icon ion-ios-search-strong" @click="searchJob"></span>
       </div>
       <div class="job-search__cancel">取消</div>
     </div>
-    <div class="job-tags">
-      <div class="job-tags__name">最近搜索 <i class="icon ion-trash-a"></i></div>
-      <div class="job-tags__list">
-        <span class="tag">web前端</span><span class="tag">php</span><span class="tag">前端</span>
-      </div>
-      <div class="job-tags__name">热门搜索</div>
-      <div class="job-tags__list">
-        <span class="tag">用户运营</span><span class="tag">PHP</span><span class="tag">web前端</span><span class="tag">java</span><span class="tag">android</span><span class="tag">php</span><span class="tag">前端</span><span class="tag">ios</span>
+    <div class="job-list" v-if="showJobs">
+      <div class="job-list-item" v-for="job in jobs">
+        <job-split></job-split>
+        <job-info :job="job"></job-info>
       </div>
     </div>
-    <div class="job-city" v-show="false">
-      <div class="job-city-hd">选择城市 <i class="icon ion-close-round"></i></div>
-      <div class="job-city-bd">
-        <div class="job-tags">
-          <div class="job-tags__name">期望工作城市</div>
-          <div class="job-tags__list city">
-            <span class="tag">成都</span>
-            <span class="change">更改 <i class="ion-chevron-right"></i></span>
+    <div class="job-search-tags" v-else>
+      <div class="job-tags">
+        <div class="job-tags-setion" v-show="searchedJobs.length > 0 ? true : false">
+          <div class="job-tags__name">最近搜索 <i class="icon ion-trash-a" @click="clearJob"></i></div>
+          <div class="job-tags__list">
+            <span class="tag" v-for="job in searchedJobs">{{ job }}</span>
           </div>
-          <div class="job-tags__name"><i class="ion-android-star"></i>热门城市</div>
-          <div class="job-tags__list city">
-            <span class="tag">全国</span><span class="tag">北京</span><span class="tag">上海</span>
-            <span class="tag">广州</span><span class="tag">深证</span><span class="tag">杭州</span>
-            <span class="tag">成都</span><span class="tag">广州</span>
+        </div>
+        <div class="job-tags-setion">
+          <div class="job-tags__name">热门搜索</div>
+          <div class="job-tags__list">
+            <span class="tag">用户运营</span><span class="tag">PHP</span><span class="tag">web前端</span><span class="tag">java</span><span class="tag">android</span><span class="tag">php</span><span class="tag">前端</span><span class="tag">ios</span>
           </div>
-          <div class="job-tags__name">全国城市</div>
-          <div class="job-tags__list city">
-            <span class="tag">鞍山</span><span class="tag">北京</span><span class="tag">成都</span>
-            <span class="tag">东莞</span>
+        </div>
+      </div>
+      <div class="job-city" v-show="showCity">
+        <div class="job-city-hd">选择城市 <i class="icon ion-close-round" @click="hideCity"></i></div>
+        <div class="job-city-bd">
+          <div class="job-tags">
+            <div class="job-tags__name">期望工作城市</div>
+            <div class="job-tags__list city">
+              <span class="tag">成都</span>
+              <span class="change">更改 <i class="ion-chevron-right"></i></span>
+            </div>
+            <div class="job-tags__name"><i class="ion-android-star"></i>热门城市</div>
+            <div class="job-tags__list city">
+              <span class="tag">全国</span><span class="tag">北京</span><span class="tag">上海</span>
+              <span class="tag">广州</span><span class="tag">深证</span><span class="tag">杭州</span>
+              <span class="tag">成都</span><span class="tag">广州</span>
+            </div>
+            <div class="job-tags__name">全国城市</div>
+            <div class="job-tags__list city">
+              <span class="tag">鞍山</span><span class="tag">北京</span><span class="tag">成都</span>
+              <span class="tag">东莞</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+<script type="text/ecmascript-6">
+  import { mapState, mapGetters } from 'vuex';
+  import { jobInfo, jobSplit } from 'components';
+
+  export default {
+    components: {
+      jobInfo,
+      jobSplit
+    },
+    created() {
+      if (this.jobs.length === 0) {
+        this.$store.dispatch('GET_JOBS');
+      }
+      if (this.cities.length === 0) {
+        this.$store.dispatch('GET_CITIES');
+      }
+    },
+    computed: {
+      ...mapState({
+        jobs: state => state.job.jobs,
+        cities: state => state.job.cities
+      }),
+      ...mapGetters({
+        hotCities: 'hotCities'
+      })
+    },
+    data() {
+      return {
+        showJobs: true,
+        showCity: false,
+        inputJob: '',
+        searchedJobs: []
+      }
+    },
+    directives: {
+      focus(el) {
+        el.focus();
+      }
+    },
+    methods: {
+      selectCity() {
+        this.showJobs = false;
+        this.showCity = true;
+      },
+      hideCity() {
+        this.showCity = false;
+        this.$refs.inputEl.focus();
+      },
+      onFocus() {
+        this.showJobs = false;
+      },
+      searchJob() {
+        let arr = this.searchedJobs;
+        let job = this.inputJob;
+
+        if (job !== '') {
+          arr.push(job)
+          this.inputJob = ''
+        }
+
+        let tags = new Set(arr)
+        // Array.from(tags)
+        this.searchedJobs = [...tags]
+      },
+      clearJob() {
+        this.searchedJobs.splice(0, this.searchedJobs.length)
+      }
+    }
+  }
+</script>
 <style lang="scss" type="text/scss">
   .page-search {
     position: absolute;
@@ -77,6 +163,7 @@
       max-width: 80px;
       margin-left: -15px;
       text-align: center;
+      font-size: 0;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -86,6 +173,7 @@
       }
       .city {
         padding: 0 5px;
+        font-size: 12px;
         vertical-align: middle;
       }
     }

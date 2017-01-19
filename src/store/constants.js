@@ -9,7 +9,7 @@
 */
 export const INVITE = {
   GET_LIST: 'GET_LIST'
-}
+};
 
 /**
  * job模块
@@ -17,5 +17,6 @@ export const INVITE = {
 */
 
 export const JOB = {
-  GET_JOBS: 'GET_JOBS'
-}
+  GET_JOBS: 'GET_JOBS',
+  GET_CITIES: 'GET_CITIES'
+};
