@@ -11,7 +11,7 @@ import { HomePage } from './pages/home';
 
 // Search
 import { SearchPage } from './pages/search';
-
+// import SearchDetail from './pages/search/SearchDetail.vue'; // 调试搜索结果页面调用
 // Message
 import { MessagePage } from './pages/message';
 
@@ -32,6 +32,7 @@ const routes = [
     children: [
       { path: '', component: HomePage },
       { path: 'search', component: SearchPage },
+    //  { path: 'search', component: SearchDetail },
       { path: 'message', component: MessagePage },
       { path: 'my', component: MyPage }
     ]
