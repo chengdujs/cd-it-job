@@ -53,7 +53,7 @@ src/ -- 源代码目录（重点关注目录）
   App.vue
   main.js -- 程序入口文件
   router.config.js -- 全局路由配置文件
-static/ -- 静态资源目录
+static/ -- 第三方静态资源目录
 test/ -- 测试代码目录
 .babelrc -- babel配置文件
 .editorconfig  -- 编辑器格式通用配置文件，建议安装EditorConfig插件
