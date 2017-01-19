@@ -7,6 +7,7 @@
         3.预留了路由接口，方便后期整合后台
         4.文字内容没有设置转换器，用了computed，后期可以直接修改
         5.mock数据结构在mock部分
+        6.组件padding 12px 16px
 */
 
 
@@ -45,17 +46,23 @@
       <search-needs :address="comDetail.addressDetail" :jobDetail="comDetail.jobDetail"></search-needs>
     </div>
     <job-split></job-split>
-    <div class="company-name-wrapper">
+    <div class="company-detail-wrapper">
         <companyDetail :arg="comDetail.companyName"></companyDetail>
     </div>
     <job-split></job-split>
     <div class="company-detail-wrapper">
       <companyDetail :arg="comDetail.companyDetail"></companyDetail>
     </div>
+    <job-split></job-split>
+    <div class="push-wrapper">
+        <vw-button type="primary" @click="pushResume">投简历</vw-button>
+    </div>
+    <job-split></job-split>
   </div>
 </template>
 
 <script>
+// import '../../vw-ui';
   import { jobSplit } from 'components';
   import { ajax } from 'common';
   import searchNeeds from './search-needs.vue';
@@ -107,6 +114,9 @@
       },
       addMark() {
         this.markflag = !this.markflag;
+      },
+      pushResume() {
+        console.log('PushResume');
       }
     }
 /*  使用路由钩子获取数据，后期对接后台接口使用
@@ -193,7 +203,7 @@ $text : rgba(0,0,0,0.5);
     }
     .header{
       position: relative;
-      padding: 12px 16px;
+      padding: 12px 20px;
       .inner{
         .title{
           margin-bottom: 8px;
@@ -236,15 +246,15 @@ $text : rgba(0,0,0,0.5);
       }
     }
     .content-wrapper{
-      padding: 12px 16px;
+      padding: 12px 20px;
 
     }
-    .company-name-wrapper{
-      padding: 12px 16px;
-    }
     .company-detail-wrapper{
-      padding: 12px 16px;
-      margin-bottom: 30px;
+      padding: 12px 20px;
+      margin-bottom: 15px;
+    }
+    .push-wrapper{
+      padding: 12px 20px;
     }
   }
 </style>
