@@ -1,5 +1,7 @@
-import jobItem from './job-item';
+import jobInfo from './job-info';
+import jobSplit from './job-split';
 
 export {
-  jobItem
+  jobInfo,
+  jobSplit
 };
