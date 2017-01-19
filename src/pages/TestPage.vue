@@ -8,6 +8,7 @@
     <br> Mini: <input type="checkbox" v-model="mini">
     <vw-button @click="onClick" :disabled="disabled" :mini="mini" :type="type" :plain="plain"><i class="ion-help-buoy"></i>页面操作</vw-button>
     <hr>
+    <vw-button @click="showToast()">Toast</vw-button>
     <vw-tabbar v-model="selected">
       <vw-tab-item label="首页" value="tab1">
         <i slot="icon" class="ion-home">
@@ -39,6 +40,11 @@
       onClick(e) {
         console.log('ok');
         console.log(e);
+      },
+      showToast() {
+        this.$toast.msg('已完成呵呵', { duration: 300000, icon: 'success' }, () => {
+          console.log('close');
+        });
       }
     }
   };
