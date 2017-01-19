@@ -2,14 +2,14 @@ import { JOB } from '../constants';
 import { ajax } from 'common';
 
 /**
- * state 用于存放job数据
+ * 存放数据
  */
 const state = {
   jobs: []
 };
 
 /**
- * 提交同步
+ * 提交同步状态
  */
 const mutations = {
   [JOB.GET_JOBS](state, data) {
@@ -19,7 +19,6 @@ const mutations = {
 
 /**
  * 提交异步请求
- * @param 与store实例具有相同方法和属性的 context 对象
  */
 const actions = {
   [JOB.GET_JOBS]({ commit }) {

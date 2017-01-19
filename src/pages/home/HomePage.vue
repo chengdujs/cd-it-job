@@ -1,7 +1,7 @@
 <template>
   <div class="invite-hot">
     <div class="job-header primary">
-      <div class="job-header__search">
+      <div class="job-header__search" @click="toSearch">
         <i class="icon ion-ios-search-strong"></i>
         <span class="txt">请输入职位/地址/关键字</span>
       </div>
@@ -17,7 +17,7 @@
     </div>
   </div>
 </template>
-<script>
+<script type="text/ecmascript-6">
   import { mapState } from 'vuex';
   import { jobInfo, jobSplit } from 'components';
 
@@ -33,6 +33,11 @@
       ...mapState({
         jobs: state => state.job.jobs
       })
+    },
+    methods: {
+      toSearch() {
+        this.$router.push('/search');
+      }
     }
   };
 </script>

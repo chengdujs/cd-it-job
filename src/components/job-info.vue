@@ -26,7 +26,7 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import { formatDate } from './../common'
+  import { formatDate } from 'common'
 
   export default {
     props: {
