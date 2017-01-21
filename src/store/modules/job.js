@@ -13,13 +13,7 @@ const state = {
  * 过滤数据
  */
 const getters = {
-  hotCities(state) {
-    return state.cities.map(city => {
-      if (city.hot) {
-        return city;
-      }
-    });
-  }
+  hotCities: state => state.cities.filter(city => city.hot)
 };
 
 /**
@@ -31,7 +25,6 @@ const mutations = {
   },
   [JOB.GET_CITIES](state, data) {
     state.cities = data;
-    console.log(data)
   }
 };
 

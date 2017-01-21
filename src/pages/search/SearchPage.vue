@@ -44,14 +44,12 @@
             </div>
             <div class="job-tags__name"><i class="ion-android-star"></i>热门城市</div>
             <div class="job-tags__list city">
-              <span class="tag">全国</span><span class="tag">北京</span><span class="tag">上海</span>
-              <span class="tag">广州</span><span class="tag">深证</span><span class="tag">杭州</span>
-              <span class="tag">成都</span><span class="tag">广州</span>
+              <span class="tag">全国</span>
+              <span class="tag" v-for="city in hotCities">{{ city.city }}</span>
             </div>
             <div class="job-tags__name">全国城市</div>
             <div class="job-tags__list city">
-              <span class="tag">鞍山</span><span class="tag">北京</span><span class="tag">成都</span>
-              <span class="tag">东莞</span>
+              <span class="tag" v-for="city in cities">{{ city.city }}</span>
             </div>
           </div>
         </div>
@@ -81,9 +79,7 @@
         jobs: state => state.job.jobs,
         cities: state => state.job.cities
       }),
-      ...mapGetters({
-        hotCities: 'hotCities'
-      })
+      ...mapGetters(['hotCities'])
     },
     data() {
       return {
@@ -115,13 +111,13 @@
         let job = this.inputJob;
 
         if (job !== '') {
-          arr.push(job)
-          this.inputJob = ''
+          arr.push(job);
+          this.inputJob = '';
         }
 
-        let tags = new Set(arr)
+        let tags = new Set(arr);
         // Array.from(tags)
-        this.searchedJobs = [...tags]
+        this.searchedJobs = [...tags];
       },
       clearJob() {
         this.searchedJobs.splice(0, this.searchedJobs.length)
