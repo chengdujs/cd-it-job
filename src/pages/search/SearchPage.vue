@@ -7,7 +7,7 @@
       </div>
       <div class="job-search__form">
         <input class="input" type="search" placeholder="请输入职位/地址/关键字"
-               @click="onFocus" ref="inputEl" v-model="inputJob">
+               @click="onFocus" ref="inputEl" v-model="inputTxt">
         <span class="icon ion-ios-search-strong" @click="searchJob"></span>
       </div>
       <div class="job-search__cancel">取消</div>
@@ -85,7 +85,7 @@
       return {
         showJobs: true,
         showCity: false,
-        inputJob: '',
+        inputTxt: '',
         searchedJobs: []
       }
     },
@@ -108,16 +108,32 @@
       },
       searchJob() {
         let arr = this.searchedJobs;
-        let job = this.inputJob;
+        let str = this.inputTxt;
 
-        if (job !== '') {
-          arr.push(job);
-          this.inputJob = '';
+        /**
+         * 最近搜索
+         */
+        if (str !== '') {
+          arr.push(str);
+          this.inputTxt = '';
         }
+        this.searchedJobs = Array.from(new Set(arr));
 
-        let tags = new Set(arr);
-        // Array.from(tags)
-        this.searchedJobs = [...tags];
+        /**
+         * 关键词搜索
+         */
+        let temp = []
+        let re = new RegExp(str)
+        this.jobs.forEach(job => {
+          Object.values(job).forEach(val => {
+            if (re.test(val)) {
+              temp.push(job)
+              return
+            }
+          })
+        })
+        Array.from(new Set(temp))
+        console.log(temp)
       },
       clearJob() {
         this.searchedJobs.splice(0, this.searchedJobs.length)
