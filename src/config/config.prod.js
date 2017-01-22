@@ -1,6 +1,6 @@
 const conf = {
   isDebug: false,
-  apiHost: 'http://chat.hstar.org:8601/api/v1/HkGhqLCUg'
+  apiHost: 'http://chat.hstar.org:8601/HkGhqLCUg'
 };
 
 window.AppConf = conf;

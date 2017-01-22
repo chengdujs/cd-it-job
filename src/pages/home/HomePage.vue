@@ -31,7 +31,7 @@
       };
     },
     created() {
-      ajax.get('http://chat.hstar.org:8601/e2607fcaf7fe/employmentList')
+      ajax.get(`${window.AppConf.apiHost}/recommendation_list`)
         .then(data => {
           if (data.state === 1) {
             this.jobs = data.data;
