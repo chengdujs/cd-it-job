@@ -1,6 +1,9 @@
-import Button from './components/button/Button';
-import Tabbar from './components/tabbar/Tabbar';
-import TabItem from './components/tabbar/TabItem';
+import Button from './components/button/button';
+
+import Tabbar from './components/tabbar/tabbar';
+import TabItem from './components/tabbar/tab-item';
+
+import Slider from './components/slider/slider';
 
 import Toast from './components/toast/toast.js';
 
@@ -8,7 +11,8 @@ import Toast from './components/toast/toast.js';
 const COMPONENTS = [
   Button,
   Tabbar,
-  TabItem
+  TabItem,
+  Slider
 ];
 
 const SERVICES = [
