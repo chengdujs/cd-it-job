@@ -1,5 +1,5 @@
 <template>
-  <div class="weui-slider-box">
+  <div class="weui-slider-box vw-slider">
     <div class="weui-slider">
       <div class="weui-slider__inner">
         <div class="weui-slider__track" :style="{'width': sliderTrackHandlerPercent}"></div>
