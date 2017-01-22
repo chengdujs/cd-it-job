@@ -45,7 +45,7 @@
             <div class="job-tags__name"><i class="ion-android-star"></i>热门城市</div>
             <div class="job-tags__list city">
               <span class="tag">全国</span>
-              <span class="tag" v-for="city in hotCities">{{ city.city }}</span>
+              <span class="tag" v-for="city in hotCities" @click="searchCity(city)">{{ city.city }}</span>
             </div>
             <div class="job-tags__name">全国城市</div>
             <div class="job-tags__list city">
