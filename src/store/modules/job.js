@@ -6,14 +6,17 @@ import { ajax } from 'common';
  */
 const state = {
   jobs: [],
-  cities: []
+  cities: [],
+  searchedJobs: [],
+  jobTags: []
 };
 
 /**
  * 过滤数据
  */
 const getters = {
-  hotCities: state => state.cities.filter(city => city.hot)
+  hotCities: state => state.cities.filter(city => city.hot),
+  hotJobTags: state => state.jobTags.filter(tag => tag.hot)
 };
 
 /**
@@ -25,6 +28,12 @@ const mutations = {
   },
   [JOB.GET_CITIES](state, data) {
     state.cities = data;
+  },
+  [JOB.GET_SEARCHED_JOBS](state, data) {
+    state.searchedJobs = data;
+  },
+  [JOB.GET_JOB_TAGS](state, data) {
+    state.jobTags = data;
   }
 };
 
@@ -38,7 +47,7 @@ const actions = {
         if (res.state === 1) {
           commit(JOB.GET_JOBS, res.data);
         }
-        return res
+        return res;
       });
   },
   [JOB.GET_CITIES]({ commit }) {
@@ -47,7 +56,16 @@ const actions = {
         if (res.state === 1) {
           commit(JOB.GET_CITIES, res.data);
         }
-        return res
+        return res;
+      })
+  },
+  [JOB.GET_JOB_TAGS]({ commit }) {
+    return ajax.get('http://chat.hstar.org:8601/HkGhqLCUg/jobTags')
+      .then(res => {
+        if (res.state === 1) {
+          commit(JOB.GET_JOB_TAGS, res.data)
+        }
+        return res;
       })
   }
 };

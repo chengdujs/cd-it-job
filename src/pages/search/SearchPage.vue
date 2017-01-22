@@ -3,33 +3,33 @@
     <div class="job-search">
       <div class="job-search__label" @click="selectCity">
         <i class="icon ion-ios-location"></i>
-        <span class="city">成都</span>
+        <span class="city">{{ selectedCity }}</span>
       </div>
       <div class="job-search__form">
         <input class="input" type="search" placeholder="请输入职位/地址/关键字"
                @click="onFocus" ref="inputEl" v-model="inputTxt">
-        <span class="icon ion-ios-search-strong" @click="searchJob"></span>
+        <span class="icon ion-ios-search-strong" @click="_searchJob"></span>
       </div>
-      <div class="job-search__cancel">取消</div>
+      <div class="job-search__cancel" @click="searchCancel">取消</div>
     </div>
     <div class="job-list" v-if="showJobs">
-      <div class="job-list-item" v-for="job in jobs">
+      <div class="job-list-item" v-for="job in resultJobs">
         <job-split></job-split>
         <job-info :job="job"></job-info>
       </div>
     </div>
     <div class="job-search-tags" v-else>
       <div class="job-tags">
-        <div class="job-tags-setion" v-show="searchedJobs.length > 0 ? true : false">
-          <div class="job-tags__name">最近搜索 <i class="icon ion-trash-a" @click="clearJob"></i></div>
+        <div class="job-tags-setion" v-show="inputJobs.length > 0 ? true : false">
+          <div class="job-tags__name">最近搜索 <i class="icon ion-trash-a" @click="searchClear"></i></div>
           <div class="job-tags__list">
-            <span class="tag" v-for="job in searchedJobs">{{ job }}</span>
+            <span class="tag" v-for="job in inputJobs" @click="searchTag(job)">{{ job }}</span>
           </div>
         </div>
         <div class="job-tags-setion">
           <div class="job-tags__name">热门搜索</div>
           <div class="job-tags__list">
-            <span class="tag">用户运营</span><span class="tag">PHP</span><span class="tag">web前端</span><span class="tag">java</span><span class="tag">android</span><span class="tag">php</span><span class="tag">前端</span><span class="tag">ios</span>
+            <span class="tag" v-for="job in hotJobTags" @click="searchHotTag(job)">{{ job.tag }}</span>
           </div>
         </div>
       </div>
@@ -49,7 +49,7 @@
             </div>
             <div class="job-tags__name">全国城市</div>
             <div class="job-tags__list city">
-              <span class="tag" v-for="city in cities">{{ city.city }}</span>
+              <span class="tag" v-for="city in cities" @click="searchCity(city)">{{ city.city }}</span>
             </div>
           </div>
         </div>
@@ -62,10 +62,22 @@
   import { jobInfo, jobSplit } from 'components';
 
   export default {
+
     components: {
       jobInfo,
       jobSplit
     },
+
+    data() {
+      return {
+        showJobs: true,
+        showCity: false,
+        inputTxt: '',
+        inputJobs: [],
+        selectedCity: '成都'
+      }
+    },
+
     created() {
       if (this.jobs.length === 0) {
         this.$store.dispatch('GET_JOBS');
@@ -73,27 +85,24 @@
       if (this.cities.length === 0) {
         this.$store.dispatch('GET_CITIES');
       }
+      if (this.jobTags.length === 0) {
+        this.$store.dispatch('GET_JOB_TAGS');
+      }
     },
+
     computed: {
       ...mapState({
         jobs: state => state.job.jobs,
-        cities: state => state.job.cities
+        cities: state => state.job.cities,
+        searchedJobs: state => state.job.searchedJobs,
+        jobTags: state => state.job.jobTags
       }),
-      ...mapGetters(['hotCities'])
-    },
-    data() {
-      return {
-        showJobs: true,
-        showCity: false,
-        inputTxt: '',
-        searchedJobs: []
+      ...mapGetters(['hotCities', 'hotJobTags']),
+      resultJobs() {
+        return this.searchedJobs.length === 0 ? this.jobs : this.searchedJobs
       }
     },
-    directives: {
-      focus(el) {
-        el.focus();
-      }
-    },
+
     methods: {
       selectCity() {
         this.showJobs = false;
@@ -106,39 +115,60 @@
       onFocus() {
         this.showJobs = false;
       },
-      searchJob() {
-        let arr = this.searchedJobs;
+      _searchJob() {
+        /**
+         * 此方法目前为纯前端操作：
+         * 等接口完善后，应该把搜索的结果缓存到数据库
+         */
+        let arr = this.inputJobs;
         let str = this.inputTxt;
 
-        /**
-         * 最近搜索
-         */
+        // 最近搜索
         if (str !== '') {
           arr.push(str);
           this.inputTxt = '';
         }
-        this.searchedJobs = Array.from(new Set(arr));
+        this.inputJobs = Array.from(new Set(arr));
 
-        /**
-         * 关键词搜索
-         */
+        // 关键词搜索
         let temp = []
         let re = new RegExp(str)
         this.jobs.forEach(job => {
           Object.values(job).forEach(val => {
             if (re.test(val)) {
               temp.push(job)
-              return
             }
           })
         })
-        Array.from(new Set(temp))
-        console.log(temp)
+        temp = Array.from(new Set(temp));
+        if (temp.length === 0) {
+          window.alert('未搜匹配到结果，默认显示全部')
+        }
+        this.$store.commit('GET_SEARCHED_JOBS', temp);
+        this.showJobs = true
       },
-      clearJob() {
-        this.searchedJobs.splice(0, this.searchedJobs.length)
+      searchTag(job) {
+        this.inputTxt = job;
+        this._searchJob();
+      },
+      searchHotTag(job) {
+        this.inputTxt = job.tag;
+        this._searchJob();
+      },
+      searchCity(city) {
+        this.selectedCity = city.city;
+        this.inputTxt = city.city;
+        this._searchJob();
+        this.showCity = false;
+      },
+      searchClear() {
+        this.inputJobs.splice(0, this.inputJobs.length)
+      },
+      searchCancel () {
+        this.showJobs = true
       }
     }
+
   }
 </script>
 <style lang="scss" type="text/scss">
