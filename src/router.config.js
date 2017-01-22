@@ -2,25 +2,18 @@ import Vue from 'vue';
 import VueRouter from 'vue-router';
 
 import LayoutPage from './pages/LayoutPage';
-
 // System
 import { NotFound } from './pages/system';
-
 // Home
 import { HomePage } from './pages/home';
-
 // Search
-import { SearchPage } from './pages/search';
-
+import { SearchPage, SearchDetail } from './pages/search';
 // Message
 import { MessagePage } from './pages/message';
-
 // My
 import { MyPage } from './pages/my';
-
 // Test Page
 import TestPage from './pages/TestPage';
-
 // 注册路由
 Vue.use(VueRouter);
 
@@ -32,6 +25,7 @@ const routes = [
     children: [
       { path: '', component: HomePage },
       { path: 'search', component: SearchPage },
+      { path: 'searchDetail', component: SearchDetail },
       { path: 'message', component: MessagePage },
       { path: 'my', component: MyPage }
     ]

@@ -1,6 +1,6 @@
 <template>
   <div class="job-info">
-    <div class="job-info-main">
+    <div class="job-info-main" @click="toSearchDetail">
       <div class="job-info__thumb">LOGO</div>
       <div class="job-info-text">
         <div class="job-info__name">
@@ -29,16 +29,26 @@
   import { formatDate } from 'common'
 
   export default {
+
     props: {
       job: {
         type: Object
       }
     },
+
+    filters: {
+      format (time) {
+        let date = new Date(time)
+        return formatDate(date, 'M月dd日');
+      }
+    },
+
     data() {
       return {
         classMap: ['type-hot', 'type-urgent']
       }
     },
+
     computed: {
       infoType() {
         let type = this.job.jobInfo.type;
@@ -52,10 +62,10 @@
         }
       }
     },
-    filters: {
-      format (time) {
-        let date = new Date(time)
-        return formatDate(date, 'M月dd日');
+
+    methods: {
+      toSearchDetail() {
+        this.$router.push('/searchDetail');
       }
     }
   }

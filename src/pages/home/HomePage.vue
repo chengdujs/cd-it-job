@@ -22,23 +22,28 @@
   import { jobInfo, jobSplit } from 'components';
 
   export default {
+
     components: {
       jobInfo,
       jobSplit
     },
+
     created() {
-      this.$store.dispatch('GET_JOBS')
+      this.$store.dispatch('GET_JOBS');
     },
+
     computed: {
       ...mapState({
         jobs: state => state.job.jobs
       })
     },
+
     methods: {
       toSearch() {
         this.$router.push('/search');
       }
     }
+
   };
 </script>
 <style lang="scss" type="text/scss">
