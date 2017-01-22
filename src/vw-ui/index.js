@@ -6,6 +6,7 @@ import TabItem from './components/tabbar/tab-item';
 import Slider from './components/slider/slider';
 
 import Toast from './components/toast/toast.js';
+import Toptip from './components/toptip/toptip.js';
 
 // All components.
 const COMPONENTS = [
@@ -16,7 +17,8 @@ const COMPONENTS = [
 ];
 
 const SERVICES = [
-  Toast
+  Toast,
+  Toptip
 ];
 
 const install = Vue => {
