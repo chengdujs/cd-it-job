@@ -1,3 +1,4 @@
+import ActionSheet from './components/actionsheet/actionsheet';
 import Button from './components/button/button';
 
 import Tabbar from './components/tabbar/tabbar';
@@ -13,6 +14,7 @@ import Toptip from './components/toptip/toptip.js';
 
 // All components.
 const COMPONENTS = [
+  ActionSheet,
   Button,
   Tabbar,
   TabItem,
