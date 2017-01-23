@@ -54,7 +54,7 @@
         this.toggleStatus = false;
       },
       onClickEnter() {
-        this.$emit('Handler', {
+        this.$emit('handler', {
           test: 123
         });
       }

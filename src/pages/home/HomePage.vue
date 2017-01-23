@@ -1,6 +1,6 @@
 <template>
   <div class="invite-hot">
-    <vw-actionsheet :model="isFilterSearch" v-on:Handler="handlerActionSheet">
+    <vw-actionsheet :model="isFilterSearch" @handler="handlerActionSheet">
       <filterSearch ref="filter" :optionData="filterData"></filterSearch>
     </vw-actionsheet>
     <div class="job-header primary">

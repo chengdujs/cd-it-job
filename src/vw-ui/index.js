@@ -1,4 +1,4 @@
-import ActionSheet from './components/actionsheet/Actionsheet';
+import ActionSheet from './components/actionsheet/actionsheet';
 import Button from './components/button/button';
 
 import Tabbar from './components/tabbar/tabbar';

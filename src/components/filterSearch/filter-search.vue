@@ -1,6 +1,6 @@
 <template>
   <div class="weui-cells y-filter__wrapper">
-    <filterItem :index=0 :option="opt" v-for="(opt,index) in filterData"  v-on:changeIndex="changed"></filterItem>
+    <filter-item :index=0 :option="opt" v-for="(opt,index) in filterData"  @changeIndex="changed"></filter-item>
   </div>
 </template>
 <script>
@@ -28,6 +28,7 @@
         handler(newVal) {
           if (newVal && newVal.length) {
             this.filterData = newVal;
+            this.initActiveObj(newVal);
           }
         }
       }
@@ -35,6 +36,11 @@
     computed: {
     },
     methods: {
+      initActiveObj(data) {
+        data.forEach(({id}) => {
+          this.$set(this.activeObj, id, 0);
+        })
+      },
       changed(id, index) {
         this.activeObj[id] = index;
       },
