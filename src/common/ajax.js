@@ -2,8 +2,8 @@ const request = (method, url, data, config = {}) => {
   let options = Object.assign({}, config, {
     url,
     method,
-    data,
-    baseURL: window.AppConf.apiHost
+    data
+    // baseURL: window.AppConf.apiHost
   });
   options.headers = options.headers || {};
   return new Promise((resolve, reject) => {

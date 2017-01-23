@@ -18,11 +18,17 @@
   </div>
 </template>
 <script>
+  import { eventBus } from 'common';
   export default {
     data() {
       return {
         pageName: 'home'
       };
+    },
+    created() {
+      eventBus.on('set-current-page', pageName => {
+        this.pageName = pageName;
+      });
     },
     watch: {
       pageName(newVal) {
