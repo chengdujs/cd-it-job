@@ -57,8 +57,8 @@
         });
 
       ajax.get(`${window.AppConf.apiHost}/getFilterSearchData`)
-        .then(resp =>{
-            this.filterData = resp.result;
+        .then(resp => {
+          this.filterData = resp.result;
         });
     }
   };
