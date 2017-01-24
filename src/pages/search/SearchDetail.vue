@@ -1,14 +1,5 @@
-/*
-    author:成都-Treasure
-    email:treasurewmj@foxmail.com
-    version:0.0.1
-    bug:1.还是没有解决ajax获取的数据无法访问二级对象，把部分内容做成子组件后可以响应
-        2.没有设计图的图例，因此找不到部分图标，自己选了，也没有字体大小，padding等设置
-        3.预留了路由接口，方便后期整合后台
-        4.文字内容没有设置转换器，用了computed，后期可以直接修改
-        5.mock数据结构在mock部分
-        6.组件padding 12px 16px
-*/
+/* author:成都-Treasure email:treasurewmj@foxmail.com version:0.0.1 bug:1.还是没有解决ajax获取的数据无法访问二级对象，把部分内容做成子组件后可以响应 2.没有设计图的图例，因此找不到部分图标，自己选了，也没有字体大小，padding等设置
+3.预留了路由接口，方便后期整合后台 4.文字内容没有设置转换器，用了computed，后期可以直接修改 5.mock数据结构在mock部分 6.组件padding 12px 16px */
 
 
 
@@ -36,7 +27,7 @@
           <li class="item"><i class="ion-android-time"></i><span> {{tag.years}}</span></li>
         </ul>
         <div class="flag" @click="addMark">
-          <i  :class="{'ion-ios-star-outline':markflag,'ion-star':!markflag}"></i>
+          <i :class="{'ion-ios-star-outline':markflag,'ion-star':!markflag}"></i>
           <p> {{mark}}</p>
         </div>
       </div>
@@ -47,7 +38,7 @@
     </div>
     <job-split></job-split>
     <div class="company-detail-wrapper">
-        <company-detail :companyModel="comDetail.companyName"></company-detail>
+      <company-detail :companyModel="comDetail.companyName"></company-detail>
     </div>
     <job-split></job-split>
     <div class="company-detail-wrapper">
@@ -55,16 +46,16 @@
     </div>
     <job-split></job-split>
     <div class="push-wrapper">
-        <vw-button type="primary" @click="pushResume">投简历</vw-button>
+      <vw-button type="primary" @click="pushResume">投简历</vw-button>
     </div>
     <job-split></job-split>
   </div>
 </template>
 
 <script>
-// import '../../vw-ui';
+  // import '../../vw-ui';
   import { jobSplit } from 'components';
-  import { ajax } from 'common';
+  import { ajax, eventBus } from 'common';
   import searchNeeds from './search-needs.vue';
   import companyDetail from './company-detail.vue';
   export default {
@@ -72,7 +63,7 @@
     data() {
       return {
         comDetail: {}, // companyDetail
-        url: 'http://chat.hstar.org:8601/99ed5748b6c1/companyDetail',
+        url: `${window.AppConf.apiHost}/comDetailTemplete`,
         markflag: false,
         money: {},
         tag: {}
@@ -89,29 +80,30 @@
       companyDetail
     },
     created() {
+      eventBus.emit('set-current-page', 'search');
       this._getData();
     },
     methods: {
       _getData() {
         ajax.get(this.url)
-        .then(data => {
-          if (data.status === 1) {
-            return data.body;
-          } else {
-            throw new Error();
-          }
-        })
-        .then(data => {
-          this.comDetail = data;
-          this.money = data.money;
-          this.tag = data.tag;
-        })
-        .catch(() => {
-          this.$toast.msg('请求的数据未得到', {duration: 3000},
-          () => {
-            window.history.go(-1);
+          .then(data => {
+            if (data.status === 1) {
+              return data.body;
+            } else {
+              throw new Error();
+            }
+          })
+          .then(data => {
+            this.comDetail = data;
+            this.money = data.money;
+            this.tag = data.tag;
+          })
+          .catch(() => {
+            this.$toast.msg('请求的数据未得到', { duration: 3000 },
+              () => {
+                window.history.go(-1);
+              });
           });
-        });
       },
       addMark() {
         this.markflag = !this.markflag;
@@ -120,37 +112,37 @@
         console.log('PushResume');
       }
     }
-/*  使用路由钩子获取数据，后期对接后台接口使用
-    beforeRouteEnter(to, from, next) {
-      ajax.get('http://chat.hstar.org:8601/99ed5748b6c1/companyDetail')
-        .then(data => {
-          if (data.status === 1) {
-            console.log(data);
-            return data.body;
+    /*  使用路由钩子获取数据，后期对接后台接口使用
+        beforeRouteEnter(to, from, next) {
+          ajax.get('http://chat.hstar.org:8601/99ed5748b6c1/companyDetail')
+            .then(data => {
+              if (data.status === 1) {
+                console.log(data);
+                return data.body;
+              }
+            })
+            .then(data => {
+              next(vm => {
+                vm.comDetail = data;
+                vm.money = data.money;
+                console.log(data);
+              });
+            });
+        },
+        watch: {
+          $route () {
+            this.comDetail = null;
+            ajax.get('http://chat.hstar.org:8601/99ed5748b6c1/companyDetail')
+            .then(data => {
+              if (data.status === 1) {
+                return data.body;
+              }
+            })
+            .then(data => {
+              this.comDetail = data;
+            });
           }
-        })
-        .then(data => {
-          next(vm => {
-            vm.comDetail = data;
-            vm.money = data.money;
-            console.log(data);
-          });
-        });
-    },
-    watch: {
-      $route () {
-        this.comDetail = null;
-        ajax.get('http://chat.hstar.org:8601/99ed5748b6c1/companyDetail')
-        .then(data => {
-          if (data.status === 1) {
-            return data.body;
-          }
-        })
-        .then(data => {
-          this.comDetail = data;
-        });
-      }
-    } */
+        } */
   }
 </script>
 

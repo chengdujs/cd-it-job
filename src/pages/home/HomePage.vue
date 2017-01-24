@@ -1,7 +1,10 @@
 <template>
   <div class="invite-hot">
+    <vw-actionsheet :model="isFilterSearch" @handler="handlerActionSheet">
+      <filterSearch ref="filter" :optionData="filterData"></filterSearch>
+    </vw-actionsheet>
     <div class="job-header primary">
-      <div class="job-header__search">
+      <div class="job-header__search" @click="searchOnClick">
         <i class="icon ion-ios-search-strong"></i>
         <span class="txt">请输入职位/地址/关键字</span>
       </div>
@@ -19,23 +22,43 @@
 </template>
 <script>
   import { jobInfo, jobSplit } from 'components';
+  import { filterSearch } from 'components/filterSearch';
   import { ajax } from 'common';
+
   export default {
     components: {
       jobInfo,
-      jobSplit
+      jobSplit,
+      filterSearch
     },
     data() {
       return {
-        jobs: []
+        jobs: [],
+        filterData: [],
+        isFilterSearch: false
       };
     },
+    methods: {
+      searchOnClick() {
+        this.isFilterSearch = !this.isFilterSearch;
+      },
+      handlerActionSheet(arg) {
+        let d = this.$refs.filter.getValue();
+        console.log(d)
+        this.isFilterSearch = false;
+      }
+    },
     created() {
-      ajax.get('http://chat.hstar.org:8601/e2607fcaf7fe/employmentList')
+      ajax.get(`${window.AppConf.apiHost}/recommendation_list`)
         .then(data => {
           if (data.state === 1) {
             this.jobs = data.data;
           }
+        });
+
+      ajax.get(`${window.AppConf.apiHost}/getFilterSearchData`)
+        .then(resp => {
+          this.filterData = resp.result;
         });
     }
   };
