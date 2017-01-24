@@ -2,7 +2,7 @@
   .vw-swipe{
     position: relative;
     width: 320px;
-    height: 160px;
+    height: 110px;
     overflow: hidden;
   }
   .vw-swipe ul{
