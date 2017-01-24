@@ -10,7 +10,25 @@
       </div>
     </div>
     <div class="job-content">
-      <div class="job-banner"><img src="../../assets/banner.png"></div>
+      <div class="job-banner">
+        <vw-swipe >
+          <vw-swipe-item>
+            <a href="">
+              <img src="../../assets/banner.png">
+            </a>
+          </vw-swipe-item>
+          <vw-swipe-item>
+            <a href="">
+              <img src="../../assets/2.jpg">
+            </a>
+          </vw-swipe-item>
+          <vw-swipe-item>
+            <a href="">
+              <img src="../../assets/3.jpg">
+            </a>
+          </vw-swipe-item>
+        </vw-swipe>
+      </div>
       <div class="job-list">
         <div class="job-list-item" v-for="job in jobs">
           <job-split></job-split>
