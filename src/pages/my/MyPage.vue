@@ -1,7 +1,7 @@
 <template>
   <div class="page-my">
-    <my-info :myInfoData="myInfoData"></my-info>
-    <my-control :myControlData="myControlData"></my-control>
+    <my-info :my-info-data="myInfoData"></my-info>
+    <my-control :my-control-data="myControlData"></my-control>
   </div>
 </template>
 <script>
@@ -27,27 +27,22 @@
     },
 
     methods: {
-
       _setData() {
-        var myApi = window.AppConf.api.my;
-
-        ajax.get(myApi.myInfoUrl)
+        ajax.get(`${window.AppConf.apiHost}/my/myInfo`)
           .then(data => {
-            this.myInfoData = data.results;
-          })
-          .catch(() => {
-            this.$toast.msg('数据获取错误！', { duration: 3000 }, () => {
-              window.history.go(-1);
-            });
+            if (data.status === '1') {
+              this.myInfoData = data.results;
+            }
+          }, () => {
+            this.myInfoData = null;
           });
-        ajax.get(myApi.myControlUrl)
+        ajax.get(`${window.AppConf.apiHost}/my/myControl`)
           .then(data => {
-            this.myControlData = data.results;
-          })
-          .catch(() => {
-            this.$toast.msg('数据获取错误！', { duration: 3000 }, () => {
-              window.history.go(-1);
-            });
+            if (data.status === '1') {
+              this.myControlData = data.results;
+            }
+          }, () => {
+            this.myControlData = null;
           });
       }
     }

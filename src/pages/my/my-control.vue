@@ -1,10 +1,13 @@
 <template>
-  <div class="my-control">
+  <div class="my-control" v-if="myControlData">
     <ul class="my-control-list">
       <li v-for="item in myControlData">
         <a href="#"><i class="icon-font" :class="item.icon"></i>{{ item.title }}</a>
       </li>
     </ul>
+  </div>
+  <div class="my-control" v-else>
+    <p class="my-control-nodata"><i class="weui-icon-warn"></i>没有得到数据</p>
   </div>
 </template>
 <script>
@@ -12,9 +15,7 @@
     name: 'my-control',
     props: {
       myControlData: {
-        default() {
-          return [];
-        }
+        default: []
       }
     }
   }
@@ -43,6 +44,15 @@
          position: relative;
          top: -3px;
        }
+    }
+    &-nodata{
+      height: 200px;
+      line-height: 200px;
+      text-align:center;
+      background: #fff;
+      .weui-icon-warn{
+        margin-right: 10px;
+      }
     }
   }
 </style>
