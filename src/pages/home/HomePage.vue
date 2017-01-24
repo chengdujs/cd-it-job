@@ -1,7 +1,10 @@
 <template>
   <div class="invite-hot">
+    <vw-actionsheet :model="isFilterSearch" @handler="handlerActionSheet">
+      <filterSearch ref="filter" :optionData="filterData"></filterSearch>
+    </vw-actionsheet>
     <div class="job-header primary">
-      <div class="job-header__search" @click="toSearch">
+      <div class="job-header__search" @click="searchOnClick">
         <i class="icon ion-ios-search-strong"></i>
         <span class="txt">请输入职位/地址/关键字</span>
       </div>
@@ -21,15 +24,23 @@
   import { mapState } from 'vuex';
   import { jobInfo, jobSplit } from 'components';
 
+  import { filterSearch } from 'components/filterSearch';
+  import { ajax } from 'common';
+
   export default {
 
     components: {
       jobInfo,
-      jobSplit
+      jobSplit,
+      filterSearch
     },
 
     created() {
       this.$store.dispatch('GET_JOBS');
+      ajax.get(`${window.AppConf.apiHost}/getFilterSearchData`)
+        .then(resp => {
+          this.filterData = resp.result;
+        });
     },
 
     computed: {
@@ -38,9 +49,21 @@
       })
     },
 
+    data() {
+      return {
+        filterData: [],
+        isFilterSearch: false
+      };
+    },
+
     methods: {
-      toSearch() {
-        this.$router.push('/search');
+      searchOnClick() {
+        this.isFilterSearch = !this.isFilterSearch;
+      },
+      handlerActionSheet(arg) {
+        let d = this.$refs.filter.getValue();
+        console.log(d)
+        this.isFilterSearch = false;
       }
     }
 

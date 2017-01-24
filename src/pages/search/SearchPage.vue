@@ -60,12 +60,14 @@
 <script type="text/ecmascript-6">
   import { mapState, mapGetters } from 'vuex';
   import { jobInfo, jobSplit } from 'components';
+  import { filterSearch } from 'components/filterSearch'
 
   export default {
 
     components: {
       jobInfo,
-      jobSplit
+      jobSplit,
+      filterSearch
     },
 
     data() {
