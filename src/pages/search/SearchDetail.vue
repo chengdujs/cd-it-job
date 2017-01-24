@@ -200,7 +200,6 @@ $text : rgba(0,0,0,0.5);
     .header{
       position: relative;
       padding: 12px 20px;
-      background: #fff;
       .inner{
         .title{
           margin-bottom: 8px;
@@ -244,7 +243,6 @@ $text : rgba(0,0,0,0.5);
     }
     .content-wrapper{
       padding: 12px 20px;
-      background: #fff;
     }
     .company-detail-wrapper{
       padding: 12px 20px;
