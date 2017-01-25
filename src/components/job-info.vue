@@ -65,7 +65,7 @@
 
     methods: {
       toSearchDetail() {
-        this.$router.push('/searchDetail');
+        this.$router.push('/searchdetail');
       }
     }
   }
