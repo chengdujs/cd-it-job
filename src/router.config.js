@@ -7,7 +7,7 @@ import { NotFound } from './pages/system';
 // Home
 import { HomePage } from './pages/home';
 // Search
-import { SearchDetail } from './pages/search';
+import { SearchPage, SearchDetail } from './pages/search';
 // Message
 import { MessagePage } from './pages/message';
 // My
@@ -24,8 +24,8 @@ const routes = [
     component: LayoutPage,
     children: [
       { path: '', component: HomePage },
-      { path: 'search', component: SearchDetail },
-    //  { path: 'search', component: SearchDetail },
+      { path: 'search', component: SearchPage },
+      { path: 'searchdetail', component: SearchDetail },
       { path: 'message', component: MessagePage },
       { path: 'my', component: MyPage }
     ]

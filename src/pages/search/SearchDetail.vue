@@ -80,7 +80,7 @@
       companyDetail
     },
     created() {
-      eventBus.emit('set-current-page', 'search');
+      eventBus.emit('set-current-page', 'searchDetail');
       this._getData();
     },
     methods: {
