@@ -42,7 +42,7 @@ const mutations = {
  */
 const actions = {
   [JOB.GET_JOBS]({ commit }) {
-    return ajax.get('http://chat.hstar.org:8601/HkGhqLCUg/recommendation_list')
+    return ajax.get(`${window.AppConf.apiHost}/recommendation_list`)
       .then(res => {
         if (res.state === 1) {
           commit(JOB.GET_JOBS, res.data);
@@ -51,7 +51,7 @@ const actions = {
       });
   },
   [JOB.GET_CITIES]({ commit }) {
-    return ajax.get('http://chat.hstar.org:8601/HkGhqLCUg/city_list')
+    return ajax.get(`${window.AppConf.apiHost}/city_list`)
       .then(res => {
         if (res.state === 1) {
           commit(JOB.GET_CITIES, res.data);
@@ -60,7 +60,7 @@ const actions = {
       })
   },
   [JOB.GET_JOB_TAGS]({ commit }) {
-    return ajax.get('http://chat.hstar.org:8601/HkGhqLCUg/jobTags')
+    return ajax.get(`${window.AppConf.apiHost}/jobTags`)
       .then(res => {
         if (res.state === 1) {
           commit(JOB.GET_JOB_TAGS, res.data)
