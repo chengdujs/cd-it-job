@@ -38,24 +38,42 @@
     </div>
   </div>
 </template>
-<script>
+<script type="text/ecmascript-6">
+  import { mapState } from 'vuex';
   import { jobInfo, jobSplit } from 'components';
+
   import { filterSearch } from 'components/filterSearch';
   import { ajax } from 'common';
 
   export default {
+
     components: {
       jobInfo,
       jobSplit,
       filterSearch
     },
+
+    created() {
+      this.$store.dispatch('GET_JOBS');
+      ajax.get(`${window.AppConf.apiHost}/getFilterSearchData`)
+        .then(resp => {
+          this.filterData = resp.result;
+        });
+    },
+
+    computed: {
+      ...mapState({
+        jobs: state => state.job.jobs
+      })
+    },
+
     data() {
       return {
-        jobs: [],
         filterData: [],
         isFilterSearch: false
       };
     },
+
     methods: {
       searchOnClick() {
         this.isFilterSearch = !this.isFilterSearch;
@@ -65,20 +83,8 @@
         console.log(d)
         this.isFilterSearch = false;
       }
-    },
-    created() {
-      ajax.get(`${window.AppConf.apiHost}/recommendation_list`)
-        .then(data => {
-          if (data.state === 1) {
-            this.jobs = data.data;
-          }
-        });
-
-      ajax.get(`${window.AppConf.apiHost}/getFilterSearchData`)
-        .then(resp => {
-          this.filterData = resp.result;
-        });
     }
+
   };
 </script>
 <style lang="scss" type="text/scss">
