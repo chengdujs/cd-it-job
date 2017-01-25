@@ -14,17 +14,17 @@
         <vw-swipe >
           <vw-swipe-item>
             <a href="">
-              <img src="../../assets/banner.png">
+              <img src="../../common/assets/banner.png">
             </a>
           </vw-swipe-item>
           <vw-swipe-item>
             <a href="">
-              <img src="../../assets/2.jpg">
+              <img src="../../common/assets/2.jpg">
             </a>
           </vw-swipe-item>
           <vw-swipe-item>
             <a href="">
-              <img src="../../assets/3.jpg">
+              <img src="../../common/assets/3.jpg">
             </a>
           </vw-swipe-item>
         </vw-swipe>
