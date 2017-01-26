@@ -49,6 +49,9 @@
       <vw-button type="primary" @click="pushResume">投简历</vw-button>
     </div>
     <job-split></job-split>
+    <div class="back" @click="back">
+      <i class="ion-ios-arrow-back"></i>
+    </div>
   </div>
 </template>
 
@@ -110,6 +113,9 @@
       },
       pushResume() {
         console.log('PushResume');
+      },
+      back() {
+        window.history.go(-1);
       }
     }
     /*  使用路由钩子获取数据，后期对接后台接口使用
@@ -154,6 +160,7 @@ $text : rgba(0,0,0,0.5);
     box-sizing: border-box;
     height: 94vh;
     overflow-y: scroll;
+    position: relative;
     &-items{
       background: #fff;
     }
@@ -250,6 +257,15 @@ $text : rgba(0,0,0,0.5);
     }
     .push-wrapper{
       padding: 12px 20px;
+    }
+    .back{
+      position: absolute;
+      left: 20px;
+      top: 10px;
+      .ion-ios-arrow-back{
+        font-size: 40px;
+        color: white;
+      }
     }
   }
 </style>
