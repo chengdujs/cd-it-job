@@ -10,7 +10,7 @@
       </div>
     </div>
     <div class="job-content">
-      <div class="job-banner">
+      <div class="job-banner" style="height: 5.5rem;">
         <vw-swipe >
           <vw-swipe-item>
             <a href="">
