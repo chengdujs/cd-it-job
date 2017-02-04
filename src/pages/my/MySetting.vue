@@ -17,7 +17,7 @@
         <div class="text">
           昵称
         </div>
-        <input type="text" class="nicknameIn" placeholder="请填写" v-model.trim.lazy="user.nickname">
+        <input type="text" class="nickname-in" placeholder="请填写" v-model.trim.lazy="user.nickname">
       </div>
     </div>
     <job-split></job-split>
@@ -26,7 +26,7 @@
         <div class="text">
           性别
         </div>
-        <select class="sexIn" name="sex" v-model.lazy="user.sex">
+        <select class="sex-in" name="sex" v-model.lazy="user.sex">
           <option value="男">男</option>
           <option value="女">女</option>
         </select>
@@ -38,7 +38,7 @@
         <div class="text">
           职业身份
         </div>
-        <input type="text" class="jobIn" v-model.trim.lazy="user.job" placeholder="请填写">
+        <input type="text" class="job-in" v-model.trim.lazy="user.job" placeholder="请填写">
       </div>
     </div>
     <job-split></job-split>
@@ -47,7 +47,7 @@
         <div class="text">
           手机号码修改
         </div>
-        <input type="tel" name="" class="telIn" v-model.number.lazy="user.tel" placeholder="请输入">
+        <input type="tel" name="" class="tel-in" v-model.number.lazy="user.tel" placeholder="请输入">
       </div>
     </div>
     <job-split></job-split>
@@ -139,7 +139,7 @@ export default {
       padding: 12px 16px;
       .nickname{
         @extend .flexType;
-        .nicknameIn{
+        .nickname-in{
           @extend .flexItem;
           font-size: 16px;
         }
@@ -152,7 +152,7 @@ export default {
       padding: 12px 16px;
       .sex{
         @extend .flexType;
-        .sexIn{
+        .sex-in{
           @extend .flexItem;
         }
         .text{
@@ -164,7 +164,7 @@ export default {
       padding: 12px 16px;
       .job{
         @extend .flexType;
-        .jobIn{
+        .job-in{
           @extend .flexItem;
         }
         .text{
@@ -176,7 +176,7 @@ export default {
       padding: 12px 16px;
       .tel{
         @extend .flexType;
-        .telIn{
+        .tel-in{
           @extend .flexItem;
         }
         .text{
