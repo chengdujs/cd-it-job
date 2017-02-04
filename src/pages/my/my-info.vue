@@ -8,7 +8,9 @@
           <p>{{ myInfoData.experience }}</p>
         </div>
       </div>
-      <div class="my-info-update"><a href="#" class="update-button weui-btn weui-btn_plain-primary">资料维护</a></div>
+      <div @click="setInfo" class="my-info-update"><a href="#" class="update-button weui-btn weui-btn_plain-primary">资料维护</a></div>
+      <my-setting :settingShow="settingShow" @flagChange="setInfo"></my-setting>
+
     </div>
   </div>
   <div class="my-info" v-else>
@@ -16,11 +18,25 @@
   </div>
 </template>
 <script>
+  import MySetting from './MySetting.vue';
   export default {
     name: 'my-info',
+    data() {
+      return {
+        settingShow: false
+      };
+    },
     props: {
       myInfoData: {
         type: Object
+      }
+    },
+    components: {
+      MySetting
+    },
+    methods: {
+      setInfo() {
+        this.settingShow = !this.settingShow;
       }
     }
   }
@@ -44,7 +60,7 @@
       }
     }
     &-update{
-      position: absolute; 
+      position: absolute;
       top: 50%;
       right: 30px;
       transform:translate(0,-50%);
