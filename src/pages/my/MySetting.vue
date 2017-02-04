@@ -95,11 +95,11 @@ export default {
 </script>
 
 <style lang="scss">
-  .flexType{
+  %flex-type{
     display: flex;
     justify-content: space-between;
   }
-  .flexItem{
+  %flex-item{
     display: 0 0 60px;
     width: 60px;
     font-size: 16px;
@@ -124,12 +124,12 @@ export default {
     .my-avatar-wrapper{
       padding: 12px 16px;
       .my-avatar{
-        @extend .flexType;
+        @extend %flex-type;
         .text{
           margin-top: 22px;
         }
         .avatar{
-          @extend .flexItem;
+          @extend %flex-item;
           height: 60px;
           background: green;
         }
@@ -138,9 +138,9 @@ export default {
     .nickname-wrapper{
       padding: 12px 16px;
       .nickname{
-        @extend .flexType;
+        @extend %flex-type;
         .nickname-in{
-          @extend .flexItem;
+          @extend %flex-item;
           font-size: 16px;
         }
         .text{
@@ -151,9 +151,9 @@ export default {
     .sex-wrapper{
       padding: 12px 16px;
       .sex{
-        @extend .flexType;
+        @extend %flex-type;
         .sex-in{
-          @extend .flexItem;
+          @extend %flex-item;
         }
         .text{
           margin-top: 5px;
@@ -163,9 +163,9 @@ export default {
     .job-wrapper{
       padding: 12px 16px;
       .job{
-        @extend .flexType;
+        @extend %flex-type;
         .job-in{
-          @extend .flexItem;
+          @extend %flex-item;
         }
         .text{
           margin-top: 5px;
@@ -175,9 +175,9 @@ export default {
     .tel-wrapper{
       padding: 12px 16px;
       .tel{
-        @extend .flexType;
+        @extend %flex-type;
         .tel-in{
-          @extend .flexItem;
+          @extend %flex-item;
         }
         .text{
           margin-top: 5px;
