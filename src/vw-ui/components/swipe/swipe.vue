@@ -1,9 +1,8 @@
 <style scoped>
   .vw-swipe{
     position: relative;
-    width: 320px;
-    height: 160px;
     overflow: hidden;
+    height: 100%;
   }
   .vw-swipe ul{
     height: 100%;

@@ -1,0 +1,14 @@
+html{
+  font-size: calc(100vw / 16); // 设计稿320，每份20px
+}
+body{
+  font-size: 14px;
+	font-family: '\5FAE\8F6F\96C5\9ED1';
+	background:#e5e5e5;
+}
+a{
+	color:#333;
+}
+a:hover{
+	color:#f00;
+}

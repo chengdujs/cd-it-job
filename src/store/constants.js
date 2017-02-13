@@ -9,12 +9,16 @@
 */
 export const INVITE = {
   GET_LIST: 'GET_LIST'
-}
+};
 
 /**
- * Example
+ * job模块
+ * 包含首页、搜索页的招聘信息
 */
 
-export const EXAMPLE = {
-  GET_SOMEONE: 'GET_SOMEONE'
-}
+export const JOB = {
+  GET_JOBS: 'GET_JOBS',
+  GET_CITIES: 'GET_CITIES',
+  GET_SEARCHED_JOBS: 'GET_SEARCHED_JOBS',
+  GET_JOB_TAGS: 'GET_JOB_TAGS'
+};

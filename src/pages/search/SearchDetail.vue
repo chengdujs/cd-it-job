@@ -14,7 +14,7 @@
         <p class="text"> {{comDetail.name}}</p>
       </div>
     </div>
-    <div class="header">
+    <div class="header search-detail-items">
       <div class="inner">
         <div class="title"> {{comDetail.job}}</div>
         <div class="salary">
@@ -33,22 +33,25 @@
       </div>
     </div>
     <job-split></job-split>
-    <div class="content-wrapper">
+    <div class="content-wrapper search-detail-items">
       <search-needs :address="comDetail.addressDetail" :jobDetail="comDetail.jobDetail"></search-needs>
     </div>
     <job-split></job-split>
-    <div class="company-detail-wrapper">
+    <div class="company-detail-wrapper search-detail-items">
       <company-detail :companyModel="comDetail.companyName"></company-detail>
     </div>
     <job-split></job-split>
-    <div class="company-detail-wrapper">
+    <div class="company-detail-wrapper search-detail-items">
       <company-detail :companyModel="comDetail.companyDetail"></company-detail>
     </div>
     <job-split></job-split>
-    <div class="push-wrapper">
+    <div class="push-wrapper search-detail-items">
       <vw-button type="primary" @click="pushResume">投简历</vw-button>
     </div>
     <job-split></job-split>
+    <div class="back" @click="back">
+      <i class="ion-ios-arrow-back"></i>
+    </div>
   </div>
 </template>
 
@@ -80,7 +83,7 @@
       companyDetail
     },
     created() {
-      eventBus.emit('set-current-page', 'search');
+      eventBus.emit('set-current-page', 'searchDetail');
       this._getData();
     },
     methods: {
@@ -110,6 +113,9 @@
       },
       pushResume() {
         console.log('PushResume');
+      },
+      back() {
+        window.history.go(-1);
       }
     }
     /*  使用路由钩子获取数据，后期对接后台接口使用
@@ -154,6 +160,10 @@ $text : rgba(0,0,0,0.5);
     box-sizing: border-box;
     height: 94vh;
     overflow-y: scroll;
+    position: relative;
+    &-items{
+      background: #fff;
+    }
     .banner{
       position: relative;
       width: 100%;
@@ -240,7 +250,6 @@ $text : rgba(0,0,0,0.5);
     }
     .content-wrapper{
       padding: 12px 20px;
-
     }
     .company-detail-wrapper{
       padding: 12px 20px;
@@ -248,6 +257,15 @@ $text : rgba(0,0,0,0.5);
     }
     .push-wrapper{
       padding: 12px 20px;
+    }
+    .back{
+      position: absolute;
+      left: 20px;
+      top: 10px;
+      .ion-ios-arrow-back{
+        font-size: 40px;
+        color: white;
+      }
     }
   }
 </style>

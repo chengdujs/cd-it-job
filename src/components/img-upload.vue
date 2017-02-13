@@ -1,6 +1,8 @@
 <template>
   <div>
-    <label for="upload-input"><img :height="height" :width="width" :src="imgSrc"></label>
+    <label for="upload-input">
+      <img class="pic" :height="height" :width="width" :src="imgSrc">
+    </label>
     <input id="upload-input" style="display: none;" type="file" accept="image/*" @change="upload($event)">
   </div>
 </template>
@@ -38,3 +40,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss" scoped>
+.pic {
+  border: none;
+}
+</style>

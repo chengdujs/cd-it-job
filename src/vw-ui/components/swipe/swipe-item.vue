@@ -1,6 +1,7 @@
 <style scoped>
   .vw-swipe-item{
     position: absolute;
+    list-style: none;
     top: 0;
     left: 0;
     height: 100%;
