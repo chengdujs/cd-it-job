@@ -53,6 +53,7 @@
     <job-split></job-split>
     <div class="bt-wrapper">
       <vw-button @click="_save" type="primary">保存</vw-button>
+      <vw-button @click="_back" type="warn">取消</vw-button>
     </div>
   </div>
 </template>
@@ -92,6 +93,10 @@ export default {
       });
       console.log('保存信息');
       console.log(this.user);
+    },
+    _back() {
+      // 预留接口处
+      this.$emit('flagChange');
     },
     imgChange(src) {
       this.user.avatar = src;
