@@ -7,7 +7,7 @@
           用户头像
         </div>
         <div class="avatar">
-
+          <img-upload :imgSrc="user.avatar" :width="avatarWidth" :height="avatarHeight" @imgChange="imgChange"></img-upload>
         </div>
       </div>
     </div>
@@ -58,7 +58,7 @@
 </template>
 
 <script>
-import { jobSplit } from 'components';
+import { jobSplit, imgUpload } from 'components';
 export default {
   name: 'my-setting',
   props: {
@@ -68,7 +68,8 @@ export default {
     }
   },
   components: {
-    jobSplit
+    jobSplit,
+    imgUpload
   },
   data() {
     return {
@@ -78,7 +79,9 @@ export default {
         sex: '男',
         job: '',
         tel: ''
-      }
+      },
+      avatarWidth: '60px',
+      avatarHeight: '60px'
     }
   },
   methods: {
@@ -89,6 +92,9 @@ export default {
       });
       console.log('保存信息');
       console.log(this.user);
+    },
+    imgChange(src) {
+      this.user.avatar = src;
     }
   }
 }
