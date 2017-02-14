@@ -79,3 +79,70 @@
 
 }
 ```
+
+## 简历信息表（resume）
+
+```
+{
+  _id: ObjectId, // 主键
+  userId: ObjectId,
+  resumeName: string, // 简历名称
+  // 基本信息
+  name: string,
+  sex: string,
+  birthday: long,
+  education: string,
+  workYears: string, // 工作年限
+  city: string,
+  phoneNumber: string,
+  emailAddress: string,
+  qq: string,
+  github: string
+  weibo: string,
+  selfIntro: string, // 自我介绍
+  // 工作经历
+  workExperience: Array<{
+    companyName: string, // 公司名称
+    jobTitle: string, // 职位
+    startDate: string, // 在职时间（开始）
+    endDate: string, // 离职时间（结束）
+    workContent: string, // 工作内容
+    createDate: long // 创建日期
+  }>,
+  // 教育经历
+  educationExperience: Array<{
+    schoolName: string,
+    majorName: string, // 专业名称
+    education: string, // 最高学历
+    graduationYear: number, // 毕业年份
+    createDate: long
+  }>,
+  // 项目经验
+  projectExperience: Array<{
+    projectName: string, // 项目名称
+    workContent: string, // 职责（工作内容）
+    startDate: string, // 开始时间（起）
+    endDate: string, // 结束时间（止）
+    projectDesc: string,
+    projectLink: string,
+    createDate: long
+  }>,
+  // 作品
+  products: Array<{
+    name: string, // 作品名称
+    linkAddress: string, // 作品链接
+    imageAddress: string, // 作品图片地址
+    description: string, // 作品描述
+    createDate: long // 创建时间
+  }>,
+  // 期望工作
+  wishWork: {
+    jobTitle: string,
+    jobType: string, // 全职，兼职，实习
+    city: string,
+    salary: string, // 薪水范围
+    description: string, // 补充说明
+    createDate: long
+  }
+}
+```
