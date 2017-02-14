@@ -96,10 +96,13 @@
   city: string,
   phoneNumber: string,
   emailAddress: string,
-  qq: string,
-  github: string
-  weibo: string,
   selfIntro: string, // 自我介绍
+  // 社交链接
+  socialLinks: Array<{
+    name: string, // 名称，如QQ，weibo
+    linkAddress: string, // 主页地址
+    createDate: long
+  }>,
   // 工作经历
   workExperience: Array<{
     companyName: string, // 公司名称
