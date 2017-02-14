@@ -17,9 +17,10 @@
   unionId: string, // 微信UnionId
   createDate: long, // 注册时间
   lastUpdateDate: long, //最后更新时间
-  // 以上为基本信息
+  // 以上为基本信息，接着是基本用户的附加信息
   favoriteJob: Array<ObjectId>, // 收藏的职位（Id）
   favoriteCompany: Array<ObjectId>, // 收藏的公司（Id）
+  // 以下是HR的附加信息
 }
 ```
 
@@ -44,7 +45,16 @@
   lastUpdateDate: long, // 最后更新时间
   lastUpdateBy: ObjectId, // 最后更新人
   // 以上为基本信息
-  interviewEvaluation: Array<Object> //面试评价
+  interviewEvaluation: Array<{
+    userId: ObjectId,
+    evaluationContent: string, // 评价内容
+    descScore: number, // 描述符合度评分（星级）
+    interviewerScore: number, // 面试官评分
+    environmentScore: number, // 公司环境评分
+    tags: Array<string>, // 标签
+    stars: Array<ObjectId>, // 点赞人员
+    createDate: long // 评价时间
+  }> //面试评价
 }
 ```
 
