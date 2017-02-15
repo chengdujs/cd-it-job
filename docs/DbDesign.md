@@ -21,6 +21,14 @@
   favoriteJob: Array<ObjectId>, // 收藏的职位（Id）
   favoriteCompany: Array<ObjectId>, // 收藏的公司（Id）
   // 以下是HR的附加信息
+  isJobPoster: boolean, // 是否是职位发布者
+  applyStatus: string, // 申请为HR，状态（'待申请', '审核中', '通过'）
+  applyInfo: { // 申请时填写的相关信息
+    componyName: string, // 公司名称
+    componyPhone: string, // 公司电话
+    fullName: string, // 姓名
+    phoneNumber: string // 个人电话
+  }
 }
 ```
 
