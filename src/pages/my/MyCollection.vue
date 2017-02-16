@@ -23,8 +23,7 @@
     data() {
       return {
         collectionList: [],
-        // url: `${window.AppConf.apiHost}/my/jobCollection`
-        url: 'http://chat.hstar.org:8601/HkGhqLCUg/my/jobCollection'
+        url: `${window.AppConf.apiHost}/my/jobCollection`
       }
     },
     created() {
