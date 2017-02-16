@@ -12,6 +12,8 @@ import { SearchPage, SearchDetail } from './pages/search';
 import { MessagePage } from './pages/message';
 // My
 import { MyPage } from './pages/my';
+// Job
+import { Job } from './pages/hr';
 // Test Page
 import TestPage from './pages/TestPage';
 // 注册路由
@@ -27,7 +29,8 @@ const routes = [
       { path: 'search', component: SearchPage },
       { path: 'searchdetail', component: SearchDetail },
       { path: 'message', component: MessagePage },
-      { path: 'my', component: MyPage }
+      { path: 'my', component: MyPage },
+      { path: 'job', component: Job }
     ]
   },
   { path: '/test', component: TestPage },
