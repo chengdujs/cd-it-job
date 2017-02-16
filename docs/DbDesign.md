@@ -149,3 +149,16 @@
   }
 }
 ```
+
+## 收藏职位表（jobCollection）
+
+```
+{
+  _id: ObjectId(), // 主键
+  name: ObjectId, // 职位名称
+  city: ObjectId, // 所在城市
+  logoUrl: ObjectId, // logo地址
+  salary: ObjectId, // 薪资范围
+  comName: ObjectId // 公司名称
+}
+```
