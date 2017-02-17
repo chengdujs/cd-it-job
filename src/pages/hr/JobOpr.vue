@@ -17,6 +17,7 @@
       &-bg {
         a {
           display: inline-block;
+          margin-top: 0;
           width: 48%;
 
           &:first-child {
