@@ -9,19 +9,20 @@
       <div class="weui-btn-bg">
         <a href="javascript:;" @click="save" class="weui-btn weui-btn_primary">保存</a>
       </div>
-      <!--<job-opr></job-opr>-->
+      <!--<v-dialog></v-dialog>-->
     </div>
   </div>
 </template>
 
 <script>
-  import JobOpr from './JobOpr';
+  import { ajax } from 'common';
   import TextEle from './TextEle';
   import TextareaEle from './TextareaEle';
   import SelectEle from './SelectEle';
   export default {
     data() {
       return {
+        url: `${window.AppConf.apiHost}/hr/job`,
         jobInfo: {},
         inputs: [{
           'type': 'select',
@@ -105,15 +106,49 @@
     },
     methods: {
       save() {
-        console.log(this.jobInfo);
+        let config = {
+          'header': {
+            'Content-Type': 'application/json'
+          }
+        };
+        if (this.validate()) {
+          ajax.post(this.url, this.jobInfo, config).then((res) => {
+            if (res.status) {
+              // 存入返回数据至store
+              // 跳转至预览页面
+              this.$router.push('/hr/job/preview');
+            }
+          });
+        }
       },
       getJobInfo(info) {
         Object.assign(this.jobInfo, info);
-        console.log(this.jobInfo);
+      },
+      validate() {
+        /**
+         * 检测表单填写完整性
+         * 1. 数据的长度
+         * 2. 数据的每个字段是否为符合要求
+         */
+        if (Object.keys(this.jobInfo).length === this.inputs.length) {
+          let isOk = true;
+          this.inputs.forEach((input) => {
+            if ((input.type === 'text' || input.type === 'textarea') && !(this.jobInfo[input.name])) {
+              isOk = false;
+              this.$toast.msg(`${input.title}数据不能为空`);
+            } else if (input.type === 'select' && !(this.jobData[input.name][this.jobInfo[input.name]])) {
+              isOk = false;
+              this.$toast.msg(`${input.title}数据不符合`);
+            }
+          })
+          return isOk;
+        } else {
+          this.$toast.msg('数据不完整');
+          return false;
+        }
       }
     },
     components: {
-      JobOpr,
       TextEle,
       TextareaEle,
       SelectEle
