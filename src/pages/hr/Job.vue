@@ -1,12 +1,12 @@
 <template>
-  <div class="weui-cells_wrapper">
-    <div class="weui-cells weui-cells-a">
+  <div class="page-cells_wrapper">
+    <div class="weui-cells page-cells-a">
       <template v-for="input in inputs">
-        <text-ele @msg="getJobInfo" :inputInfo="input" v-if="input.type == 'text'"></text-ele>
-        <select-ele @msg="getJobInfo" :inputInfo="input" :jobData="jobData[input.name]" v-if="input.type == 'select'"></select-ele>
-        <textarea-ele @msg="getJobInfo" :inputInfo="input" v-if="input.type == 'textarea'"></textarea-ele>
+        <text-ele @msg="updateJobInfo" :inputInfo="input" v-if="input.type == 'text'"></text-ele>
+        <select-ele @msg="updateJobInfo" :inputInfo="input" :jobData="jobData[input.name]" v-if="input.type == 'select'"></select-ele>
+        <textarea-ele @msg="updateJobInfo" :inputInfo="input" v-if="input.type == 'textarea'"></textarea-ele>
       </template>
-      <div class="weui-btn-bg">
+      <div class="page-btn-bg">
         <a href="javascript:;" @click="save" class="weui-btn weui-btn_primary">保存</a>
       </div>
       <!--<v-dialog></v-dialog>-->
@@ -106,13 +106,8 @@
     },
     methods: {
       save() {
-        let config = {
-          'header': {
-            'Content-Type': 'application/json'
-          }
-        };
         if (this.validate()) {
-          ajax.post(this.url, this.jobInfo, config).then((res) => {
+          ajax.post(this.url, this.jobInfo).then((res) => {
             if (res.status) {
               // 存入返回数据至store
               // 跳转至预览页面
@@ -121,7 +116,7 @@
           });
         }
       },
-      getJobInfo(info) {
+      updateJobInfo(info) {
         Object.assign(this.jobInfo, info);
       },
       validate() {
@@ -157,7 +152,7 @@
 </script>
 
 <style lang="scss">
-  .weui {
+  .page {
     &-cells {
       &-a {
         margin-top: 0;

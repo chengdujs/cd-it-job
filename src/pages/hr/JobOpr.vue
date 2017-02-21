@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="weui-btn-bg">
+    <div class="page-btn-bg">
       <a href="javascript:;" @click="toUpdateJob" class="weui-btn weui-btn_primary">修改</a>
       <a href="javascript:;" @click="putStatus" class="weui-btn weui-btn_warn">{{ statusName }}</a>
     </div>
@@ -20,7 +20,7 @@
     },
     methods: {
       toUpdateJob() {
-        this.$router.push('/job');
+        this.$router.push('/hr/job');
       },
       putStatus() {
         // status 0 状态是下线 name应该是发布；1 状态是发布 name应该是下线
@@ -48,7 +48,7 @@
   a:hover {
     color: #fff;
   }
-  .weui {
+  .page {
     &-btn {
       &-bg {
         a {

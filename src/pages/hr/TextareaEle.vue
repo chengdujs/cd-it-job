@@ -17,7 +17,7 @@
     props: ['inputInfo'],
     data() {
       return {
-        input: this.inputInfo,
+        input: '',
         model: '',
         len: 0
       }
@@ -31,6 +31,9 @@
       getLen() {
         return this.model.length;
       }
+    },
+    mounted() {
+      this.input = this.inputInfo;
     },
     methods: {
       sendData() {

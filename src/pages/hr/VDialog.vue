@@ -14,6 +14,7 @@
 
 <script>
   export default {
+    props: ['isHidden'],
     data() {
       return {
         'vDialog': 'vm-dialog',
@@ -22,7 +23,6 @@
         'weuiMask': 'weui-mask',
         'weuiAnimateFadeOut': 'weui-animate-fade-out',
         'isAndroid': false,
-        'localIsHidden': this.isHidden,
         'dialog': {
           title: '保存成功！',
           content: '是否发布？',
@@ -48,8 +48,7 @@
       doClick(e) {
         this.dialog.buttons[e.currentTarget.dataset.id].fn.call(this);
       }
-    },
-    props: ['isHidden']
+    }
   }
 </script>
 
