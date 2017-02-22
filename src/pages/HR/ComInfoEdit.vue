@@ -106,9 +106,9 @@
     watth: {},
     methods: {
       editInfo(msg) {
-        for (let obj of this.formFiles) {
-          if (obj.text === msg.des) {
-            obj.value = msg.model;
+        for (let file of this.formFiles) {
+          if (file.text === msg.des) {
+            file.value = msg.model;
             break;
           }
         }
@@ -118,6 +118,11 @@
       },
       save() {
         console.log(this.formFiles);
+        // 表单上传
+        let formData = new FormData();
+        for (let file of this.formFiles) {
+          formData.append(file.type, file.value);
+        }
       },
       cancel() {
         this.$router.go(-1);

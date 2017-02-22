@@ -31,12 +31,13 @@ export default {
       for (let i = 0, length = files.length; i < length; i++) {
         formData.append('file', files[i], files[i].name);
       }
-      let src = window.URL.createObjectURL(files[0]);
-      this.$emit('imgChange', src);
+      // 本地预览图片上传
+      // let src = window.URL.createObjectURL(files[0]);
+      // this.$emit('imgChange', src);
 
       ajax.post(`${window.AppConf.apiHost}/upload`, formData)
         .then((data) => {
-          // this.$emit('imgChange', data.src);
+          this.$emit('imgChange', data.src);
         });
     }
   }
