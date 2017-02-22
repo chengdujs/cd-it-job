@@ -29,8 +29,6 @@
     created() {
       this._getData();
     },
-    computed: {},
-    watth: {},
     methods: {
       _getData() {
         ajax.get(this.url)

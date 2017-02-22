@@ -158,7 +158,7 @@
 }
 ```
 
-## 收藏职位表（jobCollection）
+## 收藏职位表（favoriteJobItem）
 
 ```
 {
