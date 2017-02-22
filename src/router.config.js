@@ -15,7 +15,8 @@ import { MyPage } from './pages/my';
 // Job
 import { Job, JobPreview } from './pages/hr';
 // Test Page
-import TestPage from './pages/TestPage';
+// import TestPage from './pages/TestPage';
+import ComInfoEdit from './pages/HR/ComInfoEdit';
 // 注册路由
 Vue.use(VueRouter);
 
@@ -34,7 +35,7 @@ const routes = [
       { path: 'hr/job/preview', component: JobPreview }
     ]
   },
-  { path: '/test', component: TestPage },
+  { path: '/test', component: ComInfoEdit },
   { path: '*', component: NotFound }
 ];
 

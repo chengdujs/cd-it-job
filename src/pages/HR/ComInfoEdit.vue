@@ -1,28 +1,28 @@
 <template>
   <div class="com-info-edit">
     <job-split></job-split>
-    <inputLine :des="'公司信息'" @msg="editInfo"></inputLine>
+    <inputLine :des="formFiles[0].text" @msg="editInfo"></inputLine>
     <job-split></job-split>
-    <inputLine :des="'公司简称'" @msg="editInfo"></inputLine>
+    <inputLine :des="formFiles[1].text" @msg="editInfo"></inputLine>
     <job-split></job-split>
     <div class="logo">
       <div class="upload-wrapper">
-        <img-Upload :imgSrc="infoList['LOGO']" :width="logoWidth" :height="logoHeight" @imgChange="imgChange"></img-Upload>
+        <img-Upload :imgSrc="formFiles[2].value" :width="logoWidth" :height="logoHeight" @imgChange="imgChange"></img-Upload>
       </div>
       <span class="text">请上传公司图标</span>
     </div>
     <job-split></job-split>
-    <inputLine :des="'所属行业'" @msg="editInfo"></inputLine>
+    <inputLine :des="formFiles[3].text" @msg="editInfo"></inputLine>
     <job-split></job-split>
-    <inputLine :des="'公司规模'" @msg="editInfo"></inputLine>
+    <inputLine :des="formFiles[4].text" @msg="editInfo"></inputLine>
     <job-split></job-split>
-    <inputLine :des="'所处阶段'" @msg="editInfo"></inputLine>
+    <inputLine :des="formFiles[5].text" @msg="editInfo"></inputLine>
     <job-split></job-split>
-    <inputLine :des="'公司介绍'" @msg="editInfo"></inputLine>
+    <inputLine :des="formFiles[6].text" @msg="editInfo"></inputLine>
     <job-split></job-split>
-    <inputLine :des="'公司地址'" @msg="editInfo"></inputLine>
+    <inputLine :des="formFiles[7].text" @msg="editInfo"></inputLine>
     <job-split></job-split>
-    <inputLine :des="'公司网址'" @msg="editInfo"></inputLine>
+    <inputLine :des="formFiles[8].text" @msg="editInfo"></inputLine>
     <job-split></job-split>
 
 
@@ -50,17 +50,53 @@
     filters: {},
     data() {
       return {
-        infoList: {
-          '公司信息': '',
-          '公司简称': '',
-          'LOGO': '',
-          '所属行业': '',
-          '公司规模': '',
-          '所处阶段': '',
-          '公司介绍': '',
-          '公司地址': '',
-          '公司网址': ''
-        },
+        formFiles: [
+          {
+            type: 'comInfo',
+            text: '公司信息',
+            value: ''
+          },
+          {
+            type: 'name',
+            text: '公司简称',
+            value: ''
+          },
+          {
+            type: 'logoURL',
+            text: 'LOGO',
+            value: ''
+          },
+          {
+            type: 'industry',
+            text: '所属行业',
+            value: ''
+          },
+          {
+            type: 'staffTotalNumber',
+            text: '公司规模',
+            value: ''
+          },
+          {
+            type: 'financingStage',
+            text: '所处阶段',
+            value: ''
+          },
+          {
+            type: 'description',
+            text: '公司介绍',
+            value: ''
+          },
+          {
+            type: 'address',
+            text: '公司地址',
+            value: ''
+          },
+          {
+            type: 'comURL',
+            text: '公司网址',
+            value: ''
+          }
+        ],
         logoWidth: '60px',
         logoHeight: '60px'
       }
@@ -70,13 +106,18 @@
     watth: {},
     methods: {
       editInfo(msg) {
-        this.infoList[msg.des] = msg.model;
+        for (let obj of this.formFiles) {
+          if (obj.text === msg.des) {
+            obj.value = msg.model;
+            break;
+          }
+        }
       },
       imgChange(src) {
-        this.infoList['LOGO'] = src;
+        this.formFiles[2].value = src;
       },
       save() {
-        console.log(this.infoList);
+        console.log(this.formFiles);
       },
       cancel() {
         this.$router.go(-1);
