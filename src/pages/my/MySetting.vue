@@ -7,7 +7,7 @@
           用户头像
         </div>
         <div class="avatar">
-
+          <img-upload :imgSrc="user.avatar" :width="avatarWidth" :height="avatarHeight" @imgChange="imgChange"></img-upload>
         </div>
       </div>
     </div>
@@ -53,12 +53,13 @@
     <job-split></job-split>
     <div class="bt-wrapper">
       <vw-button @click="_save" type="primary">保存</vw-button>
+      <vw-button @click="_back" type="warn">取消</vw-button>
     </div>
   </div>
 </template>
 
 <script>
-import { jobSplit } from 'components';
+import { jobSplit, imgUpload } from 'components';
 export default {
   name: 'my-setting',
   props: {
@@ -68,7 +69,8 @@ export default {
     }
   },
   components: {
-    jobSplit
+    jobSplit,
+    imgUpload
   },
   data() {
     return {
@@ -78,7 +80,9 @@ export default {
         sex: '男',
         job: '',
         tel: ''
-      }
+      },
+      avatarWidth: '60px',
+      avatarHeight: '60px'
     }
   },
   methods: {
@@ -89,6 +93,13 @@ export default {
       });
       console.log('保存信息');
       console.log(this.user);
+    },
+    _back() {
+      // 预留接口处
+      this.$emit('flagChange');
+    },
+    imgChange(src) {
+      this.user.avatar = src;
     }
   }
 }
