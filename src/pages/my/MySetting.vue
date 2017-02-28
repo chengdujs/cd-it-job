@@ -27,8 +27,8 @@
           性别
         </div>
         <select class="sex-in" name="sex" v-model.lazy="user.sex">
-          <option value="男">男</option>
-          <option value="女">女</option>
+          <option value="1">男</option>
+          <option value="0">女</option>
         </select>
       </div>
     </div>
@@ -59,143 +59,218 @@
 </template>
 
 <script>
-import { jobSplit, imgUpload } from 'components';
-export default {
-  name: 'my-setting',
-  props: {
-    settingShow: {
-      type: Boolean,
-      default: false
-    }
-  },
-  components: {
-    jobSplit,
-    imgUpload
-  },
-  data() {
-    return {
-      user: {
-        nickname: '',
-        avatar: '',
-        sex: '男',
-        job: '',
-        tel: ''
+  import { jobSplit, imgUpload } from 'components';
+
+  const SUCCESS = 1;
+
+  export default {
+    name: 'my-setting',
+    props: {
+      settingShow: {
+        type: Boolean,
+        default: false
       },
-      avatarWidth: '60px',
-      avatarHeight: '60px'
-    }
-  },
-  methods: {
-    _save() {
-      // 预留接口处
-      this.$toast.msg('信息已保存', { duration: 3000 }, () => {
+      userId: {
+        type: String
+      }
+    },
+    components: {
+      jobSplit,
+      imgUpload
+    },
+    data() {
+      return {
+        user: {
+          nickname: '',
+          avatar: '',
+          sex: '男',
+          job: '',
+          tel: ''
+        },
+        avatarWidth: '60px',
+        avatarHeight: '60px'
+      }
+    },
+    watch: {
+      settingShow(val, oldVal) {
+        let self = this;
+        if (val) {
+          /* 创建组件时获取个人信息 */
+          axios.get('http://chat.hstar.org:8601/HkGhqLCUg/my_info', {
+            userId: self.userId
+          })
+            .then(function (response) {
+              let data = response.data;
+              if (data.status === SUCCESS) {
+                self.user.nickname = data.userInfo.nickname
+                self.user.avatar = data.userInfo.avatar
+                self.user.sex = data.userInfo.sex
+                self.user.job = data.userInfo.job
+                self.user.tel = data.userInfo.tel
+              } else {
+                self.$toast.msg('信息已保存', { duration: 3000 }, () => {
+                  self.$emit('flagChange');
+                });
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+              self.$toast.msg('服务器响应失败！', { duration: 1500 }, () => {
+                self.$emit('flagChange');
+              });
+            });
+        }
+      }
+    },
+    methods: {
+      _save() {
+        let self = this;
+        /* 验证手机号码，只允许为空或者手机a号码格式正确时才可以上传 */
+        function _validate() {
+          if (self.user.tel === '') {
+            return { status: true, msg: '可以保存' };
+          } else {
+            if (/^1[0-9]{10}$/.test(self.user.tel)) {
+              return { status: true, msg: '可以保存' };
+            } else {
+              return { status: false, msg: '请输入正确的手机号码' }
+            }
+          }
+        }
+        let validate = _validate();
+        /* 更新保存个人信息 */
+        if (validate.status) {
+          /* global axios */
+          axios.post('http://chat.hstar.org:8601/HkGhqLCUg/my/updateInfo', {
+            nickname: self.user.nickname,
+            avatar: self.user.avatar,
+            sex: self.user.sex,
+            job: self.user.job,
+            tel: self.user.tel
+          })
+            .then(function (response) {
+              let data = response.data;
+              if (data.status === SUCCESS) {
+                self.$toast.msg('信息保存成功', { duration: 1000 }, () => {
+                  self.$emit('flagChange');
+                });
+              } else {
+                self.$toast.msg('信息保存失败', { duration: 1000 }, () => { });
+              }
+            })
+            .catch(function (error) {
+              console.log(error);
+              this.$toast.msg('信息保存失败', { duration: 3000 }, () => { });
+            });
+        } else {
+          this.$toast.msg(validate.msg, { duration: 2000 }, '');
+        }
+      },
+      _back() {
+        // 预留接口处
         this.$emit('flagChange');
-      });
-      console.log('保存信息');
-      console.log(this.user);
-    },
-    _back() {
-      // 预留接口处
-      this.$emit('flagChange');
-    },
-    imgChange(src) {
-      this.user.avatar = src;
+      },
+      imgChange(src) {
+        this.user.avatar = src;
+      }
     }
   }
-}
+
 </script>
 
 <style lang="scss">
-  %flex-type{
+  %flex-type {
     display: flex;
     justify-content: space-between;
   }
-  %flex-item{
+  
+  %flex-item {
     display: 0 0 60px;
     width: 60px;
     font-size: 16px;
     margin-top: 5px;
   }
-  .my-setting{
+  
+  .my-setting {
     position: fixed;
     width: 100%;
     left: 0;
     top: 0;
     z-index: 99;
     background: white;
-    input{
+    input {
       outline: none;
       border: none;
     }
-    .text{
+    .text {
       flex: 1;
       font-size: 16px;
       line-height: 16px;
     }
-    .my-avatar-wrapper{
+    .my-avatar-wrapper {
       padding: 12px 16px;
-      .my-avatar{
+      .my-avatar {
         @extend %flex-type;
-        .text{
+        .text {
           margin-top: 22px;
         }
-        .avatar{
+        .avatar {
           @extend %flex-item;
           height: 60px;
           background: green;
         }
       }
     }
-    .nickname-wrapper{
+    .nickname-wrapper {
       padding: 12px 16px;
-      .nickname{
+      .nickname {
         @extend %flex-type;
-        .nickname-in{
+        .nickname-in {
           @extend %flex-item;
           font-size: 16px;
         }
-        .text{
+        .text {
           margin-top: 5px;
         }
       }
     }
-    .sex-wrapper{
+    .sex-wrapper {
       padding: 12px 16px;
-      .sex{
+      .sex {
         @extend %flex-type;
-        .sex-in{
+        .sex-in {
           @extend %flex-item;
         }
-        .text{
+        .text {
           margin-top: 5px;
         }
       }
     }
-    .job-wrapper{
+    .job-wrapper {
       padding: 12px 16px;
-      .job{
+      .job {
         @extend %flex-type;
-        .job-in{
+        .job-in {
           @extend %flex-item;
         }
-        .text{
+        .text {
           margin-top: 5px;
         }
       }
     }
-    .tel-wrapper{
+    .tel-wrapper {
       padding: 12px 16px;
-      .tel{
+      .tel {
         @extend %flex-type;
-        .tel-in{
+        .tel-in {
           @extend %flex-item;
         }
-        .text{
+        .text {
           margin-top: 5px;
         }
       }
     }
-    .bt-wrapper{
+    .bt-wrapper {
       padding: 12px 16px;
     }
   }
