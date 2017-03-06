@@ -1,13 +1,13 @@
 <template>
   <div class="input-line">
     <label class="des" :for="id">
-      {{des}}
+      {{comModel.text}}
     </label>
     <input type="text"
     :id="id"
-    :placeholder="hint"
+    :placeholder="comModel.value?comModel.value:hint"
     class="input"
-    :name="des"
+    :name="comModel.text"
     v-model="model"
     @change="sendData">
   </div>
@@ -16,9 +16,9 @@
   export default {
     name: 'input-line',
     props: {
-      des: {
-        type: String,
-        default: '公司信息'
+      comModel: {
+        type: Object,
+        default: {}
       }
     },
     data() {
@@ -29,13 +29,13 @@
     computed: {
       msg() {
         let msg = {
-          des: this.des,
+          des: this.comModel.text,
           model: this.model
         };
         return msg;
       },
       hint() {
-        return `请填写${this.des}`;
+        return `请填写${this.comModel.text}`;
       },
       id() {
         return Math.floor(Math.random() * 89999 + 10000);
