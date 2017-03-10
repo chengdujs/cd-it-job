@@ -1,4 +1,4 @@
-<template>
+n<template>
   <div class="weui-tab">
     <div class="weui-navbar" @click="onNavbarClick($event)">
         <div class="weui-navbar__item" :class="{'weui-bar__item_on': isFirstTabActive}">
@@ -17,7 +17,7 @@
 
 <script type="text/javascript">
 export default {
-  name: 'vw-navbar',
+  name: 'job-navbar',
   props: {
     onFirstTabActive: {
       type: Function,

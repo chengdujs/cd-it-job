@@ -12,7 +12,7 @@
 
 <template>
   <div class="page-wrapper">
-    <vw-navbar :onFirstTabActive="onFirstTabActive" :onSecondTabActive="onSecondTabActive">
+    <job-navbar :onFirstTabActive="onFirstTabActive" :onSecondTabActive="onSecondTabActive">
       <div slot="tab-content-first">
         <div class="job-list">
           <div class="job-list-item" v-for="job in jobs">
@@ -29,18 +29,19 @@
           </div>
         </div>
       </div>
-    </vw-navbar>
+    </job-navbar>
   </div>
 </template>
 
 <script>
-import { jobInfo, jobSplit } from 'components';
+import { jobInfo, jobSplit, jobNavbar } from 'components';
 import { ajax } from 'common';
 
 export default {
   components: {
     jobInfo,
-    jobSplit
+    jobSplit,
+    jobNavbar
   },
   data() {
     return {

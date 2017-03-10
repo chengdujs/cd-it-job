@@ -12,13 +12,10 @@ import SwipeItem from './components/swipe/swipe-item';
 import Toast from './components/toast/toast.js';
 import Toptip from './components/toptip/toptip.js';
 
-import Navbar from './components/navbar/Navbar';
-
 // All components.
 const COMPONENTS = [
   ActionSheet,
   Button,
-  Navbar,
   Tabbar,
   TabItem,
   Slider,
