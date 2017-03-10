@@ -13,7 +13,7 @@ import { MessagePage } from './pages/message';
 // My
 import { MyPage } from './pages/my';
 // Job
-import { Job, JobPreview } from './pages/hr';
+import { Job, JobPreview, JobMgnt } from './pages/hr';
 // Test Page
 import TestPage from './pages/TestPage';
 import TestResumeDetail from './pages/TestResumeDetail';
@@ -32,6 +32,7 @@ const routes = [
       { path: 'message', component: MessagePage },
       { path: 'my', component: MyPage },
       { path: 'hr/job', component: Job },
+      { path: 'hr/job/mgnt', component: JobMgnt },
       { path: 'hr/job/preview', component: JobPreview }
     ]
   },
