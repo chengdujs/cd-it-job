@@ -2,7 +2,7 @@
   <div class="my-control" v-if="myControlData">
     <ul class="my-control-list">
       <li v-for="item in myControlData">
-        <a href="#"><i class="icon-font" :class="item.icon"></i>{{ item.title }}</a>
+        <a :href="item.href"><i class="icon-font" :class="item.icon"></i>{{ item.title }}</a>
       </li>
     </ul>
   </div>
