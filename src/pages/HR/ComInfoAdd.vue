@@ -1,5 +1,5 @@
 <template>
-  <div class="com-info-edit">
+  <div class="com-info-add">
     <job-split></job-split>
     <inputLine :comModel="formFiles[0]" @msg="editInfo"></inputLine>
     <job-split></job-split>
@@ -40,9 +40,8 @@
 </template>
 <script>
   import { inputLine, jobSplit, imgUpload } from 'components';
-  import { ajax } from 'common';
   export default {
-    name: 'com-info-edit',
+    name: 'com-info-add',
     components: {
       inputLine,
       jobSplit,
@@ -99,13 +98,10 @@
           }
         ],
         logoWidth: '60px',
-        logoHeight: '60px',
-        url: `${window.AppConf.apiHost}/ComInfo`
+        logoHeight: '60px'
       }
     },
-    created() {
-      this._getData(this.url);
-    },
+    created() {},
     computed: {},
     watth: {},
     methods: {
@@ -122,7 +118,7 @@
       },
       save() {
         console.log(this.formFiles);
-        //  表单上传
+        // 表单上传
         // let formData = new FormData();
         // for (let file of this.formFiles) {
         //   formData.append(file.type, file.value);
@@ -130,18 +126,12 @@
       },
       cancel() {
         this.$router.go(-1);
-      },
-      _getData(url) {
-        ajax.get(url)
-        .then(data => {
-          this.formFiles = data;
-        });
       }
     }
   }
 </script>
 <style lang="scss" scoped>
-  .com-info-edit{
+  .com-info-add{
     .logo{
       display: flex;
       background: white;
