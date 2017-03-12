@@ -1,5 +1,7 @@
 import HomePage from './HomePage';
+import HomeSearch from './HomeSearch';
 
 export {
-  HomePage
+  HomePage,
+  HomeSearch
 };
