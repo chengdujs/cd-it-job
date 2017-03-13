@@ -77,7 +77,7 @@
   financingStage: string, // 融资阶段
   industry: string, // 行业领域
   staffTotalNumber: string, // 员工总数
-  address: string // 办公地址
+  address: string, // 办公地址
   description: string, // 公司介绍
   createDate: long, // 创建该记录的时间（非公司创建时间）
   createBy: ObjectId, // 创建人（非公司创建人）
