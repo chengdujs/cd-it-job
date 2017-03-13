@@ -1,0 +1,37 @@
+{
+  "status": 1,
+  "body": {
+    "name": "豪情",
+    "subtitle": "三年经验",
+    "baseInfo": {
+      "expectJob": "前端开发",
+      "careerYear": "3年",
+      "birthDate": "1992.11",
+      "presentAddress": "上海",
+      "phone": "12345678901",
+      "email": "abc@163.com"
+    },
+    "expectJob": {
+      "post": "前端开发",
+      "category": "全职",
+      "city": "上海"
+    },
+    "jobDetail": "1、热爱前端，喜欢用最扎实的代码技术做出效果上最炫，代码上最合理的页面；\n2、熟悉html,css，能够兼容主流各种浏览器，比如ie6-10, chrome,firefox,opera；\n3、熟悉js dom, event,ajax, jsop能够编写基本的js原生代码；\n4、熟悉jquery api，能够编写最基本的动态交互效果，并擅长用jquery插件来封装日常的开发组件，能够保证代码的性能或可难搞性。",
+    "workExperience": "2011年—2012年    打杂队搬砖队工作",
+    "worksShow": "http://jikeytang.github.io",
+    "skills": [
+      {
+        "skill": "HTML5",
+        "degree": 80
+      },
+      {
+        "skill": "CSS3",
+        "degree": 90
+      },
+      {
+        "skill": "JavaScript",
+        "degree": 86
+      },
+    ]
+  }
+}
