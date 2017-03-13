@@ -3,6 +3,11 @@
     <vw-actionsheet :model="isFilterSearch" @handler="handlerActionSheet">
       <filterSearch ref="filter" :optionData="filterData"></filterSearch>
     </vw-actionsheet>
+    <!--我修改的部分，放置的页面有问题-->
+    <div v-if="isSearch" class="home-search-wrapper">
+      <home-search :searchValue="searchValue"></home-search>
+    </div>
+    <!---->
     <div class="job-header primary">
       <div class="job-header__search" @click="searchOnClick">
         <i class="icon ion-ios-search-strong"></i>
@@ -41,7 +46,7 @@
 <script type="text/ecmascript-6">
   import { mapState } from 'vuex';
   import { jobInfo, jobSplit } from 'components';
-
+  import HomeSearch from './HomeSearch';
   import { filterSearch } from 'components/filterSearch';
   import { ajax } from 'common';
 
@@ -50,7 +55,8 @@
     components: {
       jobInfo,
       jobSplit,
-      filterSearch
+      filterSearch,
+      HomeSearch
     },
 
     created() {
@@ -70,7 +76,9 @@
     data() {
       return {
         filterData: [],
-        isFilterSearch: false
+        isFilterSearch: false,
+        searchValue: [],
+        isSearch: false
       };
     },
 
@@ -79,15 +87,30 @@
         this.isFilterSearch = !this.isFilterSearch;
       },
       handlerActionSheet(arg) {
-        let d = this.$refs.filter.getValue();
-        console.log(d)
+        this.searchValue = this.$refs.filter.getValue();
+        console.log(this.searchValue);
         this.isFilterSearch = false;
+        this.switchIsSearch();
+        console.log(this.isSearch);
+      },
+      switchIsSearch() {
+        this.isSearch = !this.isSearch;
       }
     }
 
   };
 </script>
 <style lang="scss" type="text/scss">
+// 修改的部分
+  .home-search-wrapper{
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin-top: 40px;
+    z-index: 99;
+  }
+// 修改
 
   .invite-hot img {
     max-width: 100%;
