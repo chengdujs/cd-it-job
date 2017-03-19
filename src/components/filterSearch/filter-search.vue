@@ -1,6 +1,6 @@
 <template>
   <div class="weui-cells y-filter__wrapper">
-    <filter-item :index=0 :option="opt" v-for="(opt,index) in filterData"  @changeIndex="changed"></filter-item>
+    <filter-item :index=0 :option="opt" v-for="(opt,index) in filterData" :key="index" @changeIndex="changed"></filter-item>
   </div>
 </template>
 <script>

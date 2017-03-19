@@ -1,8 +1,9 @@
-require('./css/all.scss');
+require('./scss/all.scss');
 
 import Vue from 'vue';
 import router from './router.config';
 import store from './store';
+Vue.config.productionTip = false;
 
 import App from './App';
 

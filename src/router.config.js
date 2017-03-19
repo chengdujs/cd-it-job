@@ -3,7 +3,7 @@ import VueRouter from 'vue-router';
 
 import LayoutPage from './pages/LayoutPage';
 // System
-import { NotFound } from './pages/system';
+import { NotFoundPage } from './pages/system';
 // Home
 import { HomePage } from './pages/home';
 // Search
@@ -38,7 +38,7 @@ const routes = [
   },
   { path: '/test', component: TestPage },
   { path: '/testresume', component: TestResumeDetail },
-  { path: '*', component: NotFound }
+  { path: '*', component: NotFoundPage }
 ];
 
 /* 注册路由 */
